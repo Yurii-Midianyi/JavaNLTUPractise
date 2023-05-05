@@ -8,6 +8,6 @@
 <body>
 <p>Management page</p>
 <h1>CSS test</h1>
-<a href="/home">home page</a>
+<a href="<c:url value="/home" />">home page</a>
 </body>
 </html>

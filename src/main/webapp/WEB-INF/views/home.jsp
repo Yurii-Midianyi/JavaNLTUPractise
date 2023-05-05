@@ -8,6 +8,6 @@
 <body>
 <p>Success</p>
 <h1>1. Test CSS</h1>
-<a href="/management">management page</a>
+<a href="<c:url value="/management" />">management page</a>
 </body>
 </html>
