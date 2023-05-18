@@ -2,10 +2,10 @@
 <html>
 <head>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-    <title>Customers</title>
+    <title>Hotels</title>
 </head>
 <body>
-<p>Customer page</p>
+<p>Hotel page</p>
 <a href="<c:url value="/home" />">home page</a>
 
 	<div>
@@ -16,16 +16,14 @@
 		<table>
 			<tr>
 				<th>id</th>
-				<th>First name</th>
-				<th>Last name</th>
-				<th>email</th>
+				<th>name</th>
+				<th>country</th>
 			</tr>
-			<c:forEach var="tempCustomer" items="${customers}">
+			<c:forEach var="tempHotel" items="${hotels}">
 				<tr>
-					<td>${tempCustomer.id}</td>
-					<td>${tempCustomer.firstName}</td>
-					<td>${tempCustomer.lastName}</td>
-					<td>${tempCustomer.email}</td>
+					<td>${tempHotel.id}</td>
+					<td>${tempHotel.name}</td>
+					<td>${tempHotel.country}</td>
 				</tr>
 			</c:forEach>
 		</table>
