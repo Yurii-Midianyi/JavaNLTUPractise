@@ -22,7 +22,7 @@
 			<c:forEach var="tempHotel" items="${hotels}">
 				<tr>
 					<td>${tempHotel.id}</td>
-					<td>${tempHotel.name}</td>
+					<td>${tempHotel.hotelName}</td>
 					<td>${tempHotel.country}</td>
 				</tr>
 			</c:forEach>

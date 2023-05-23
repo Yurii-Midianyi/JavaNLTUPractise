@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nltu.dao.HotelDAO;
 import com.nltu.entity.Hotel;
 
+import jakarta.transaction.Transactional;
+
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
@@ -17,6 +19,7 @@ public class HotelController {
 	private HotelDAO hotelDAO;
 	
 	@RequestMapping("/list")
+	@Transactional
 	public String listCustomers(Model theModel) {
 		
 		//get hotels from the dao
