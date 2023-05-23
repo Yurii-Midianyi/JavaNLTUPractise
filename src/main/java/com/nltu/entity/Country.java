@@ -25,21 +25,17 @@ public class Country {
 
 	public Country() {}
 
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public String getCountryName() {
 		return countryName;
 	}
-
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
@@ -48,7 +44,6 @@ public class Country {
 	public List<Hotel> getHotels() {
 		return hotels;
 	}
-
 
 	public void setHotels(List<Hotel> hotels) {
 		this.hotels = hotels;
