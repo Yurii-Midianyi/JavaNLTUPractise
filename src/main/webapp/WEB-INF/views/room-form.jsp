@@ -7,12 +7,16 @@
 </head>
 <body>
 	
-	<form:form action="saveRoom" modelAttribute="room" method="POST">
+	<form:form action="${pageContext.request.contextPath}/room/saveRoom" modelAttribute="room" method="POST">
 		<table>
 			<tbody>
 				<tr>
 					<td><label>Capacity:</label></td>
 					<td><form:input path="capacity"/></td>					
+				</tr>
+			
+				<tr>				
+					<td><form:input type="hidden" path="hotel.id" value="${hotelId}"/></td>					
 				</tr>
 			
 				<tr>

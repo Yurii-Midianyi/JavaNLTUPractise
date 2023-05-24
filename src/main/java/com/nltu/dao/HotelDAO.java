@@ -5,4 +5,6 @@ import com.nltu.entity.Hotel;
 
 public interface HotelDAO {
 	public List<Hotel> getHotels();
+	
+	public Hotel getHotel(int id);
 }

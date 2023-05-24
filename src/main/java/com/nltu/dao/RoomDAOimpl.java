@@ -35,7 +35,14 @@ public class RoomDAOimpl implements RoomDAO {
 		//return the results
 		return rooms;
 	}
-	
-	
 
+	@Override
+	public void saveRoom(Room room) {
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+						
+		//save the room
+		currentSession.persist(room);
+											
+	}
 }

@@ -6,19 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nltu.dao.HotelDAO;
 import com.nltu.dao.RoomDAO;
+import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
+import com.nltu.service.RoomService;
 
 @Controller
 @RequestMapping("/room")
 public class RoomController {
 	
 	@Autowired
-	private RoomDAO roomDAO;
+	private RoomService roomService;
+	
+	@Autowired
+	private RoomDAO roomDAO; //exchange for service later
+	
+	@Autowired
+	private HotelDAO hotelDAO; //exchange for service later
 		
 	@GetMapping("/list/{hotelId}")
 	public String showList(@PathVariable int hotelId, Model model) {
@@ -38,9 +48,21 @@ public class RoomController {
 	public String showFormForAdd(@PathVariable int hotelId, Model model) {	
 		Room newRoom = new Room();
 	
+		Hotel hotel = hotelDAO.getHotel(hotelId);
+
+	    // Set the associated Hotel object in the new Room
+	    newRoom.setHotel(hotel);
+		
 		model.addAttribute("room", newRoom);
 		model.addAttribute("hotelId", hotelId);
 		
 		return "room-form";
+	}
+	
+	@PostMapping("/saveRoom")
+	public String saveRoom(@ModelAttribute("room") Room theRoom) {
+		
+		roomService.saveRoom(theRoom);
+		return "redirect:/room/list/"+theRoom.getHotel().getId();
 	}
 }
