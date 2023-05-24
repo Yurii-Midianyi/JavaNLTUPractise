@@ -20,10 +20,10 @@ public class Hotel {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="name")
+	@Column(name="hotel_name")
 	private String name;
 	
-	@Column(name="country")
+	@Column(name="country_id")
 	private String country;
 	
 	@OneToMany(mappedBy ="hotel",
