@@ -21,7 +21,7 @@ public class RoomController {
 	private RoomDAO roomDAO;
 		
 	@GetMapping("/list/{hotelId}")
-	public String showFormForUpdate(@PathVariable int hotelId, Model model) {
+	public String showList(@PathVariable int hotelId, Model model) {
 		
 		// Retrieve the list of rooms for the specified hotelId
 		List<Room> rooms = roomDAO.getRooms(hotelId);
@@ -31,5 +31,10 @@ public class RoomController {
 
 		// Return the view name
 		return "roomList";
+	}
+	
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model model) {	
+		return "room-form";
 	}
 }

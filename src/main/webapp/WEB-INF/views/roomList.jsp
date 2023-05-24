@@ -12,6 +12,10 @@
 		<h2>Test</h2>
 	</div>
 	
+	<input type="button" value="Add Room" 
+    onclick="window.location.href='${pageContext.request.contextPath}/room/showFormForAdd'; return false;"
+    class="" /><!-- attribute class needed for style purposes -->
+		
 	<div>
 		<table>
 			<tr>
@@ -43,6 +47,8 @@
 </c:forEach>
 		</table>
 	</div>
+	
+	
 	
 </body>
 </html>
