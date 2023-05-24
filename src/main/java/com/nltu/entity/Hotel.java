@@ -17,13 +17,13 @@ import jakarta.persistence.Table;
 public class Hotel {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="name")
+	@Column(name="hotel_name")
 	private String name;
 	
-	@Column(name="country")
+	@Column(name="country_id")
 	private String country;
 	
 	@OneToMany(mappedBy ="hotel",

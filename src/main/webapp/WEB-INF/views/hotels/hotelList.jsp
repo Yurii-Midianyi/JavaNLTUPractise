@@ -21,14 +21,18 @@
 			</tr>
 			<c:forEach var="tempHotel" items="${hotels}">
 				<tr>
-					<td>${tempHotel.id}</td>
-					<td>${tempHotel.name}</td>
+					 <td>${tempHotel.id}</td>
+					<td><a href="/hotel/${tempHotel.getId()}">${tempHotel.getName()}</a></td>
 					<td>${tempHotel.country}</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
-	
+<br/>
+<hr/>
+
+<a href="/hotel/new">Create new</a>
+
 </body>
 </html>
- 
+<%--<a href="/hotels/${hotel.getID()}"> ${tempHotel.id} </a>--%>
