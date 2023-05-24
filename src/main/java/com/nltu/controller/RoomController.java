@@ -28,13 +28,19 @@ public class RoomController {
 
 		// Add the list of rooms to the model
 		model.addAttribute("rooms", rooms);
-
+		model.addAttribute("hotelId", hotelId);
+		
 		// Return the view name
 		return "roomList";
 	}
 	
-	@GetMapping("/showFormForAdd")
-	public String showFormForAdd(Model model) {	
+	@GetMapping("/showFormForAdd/{hotelId}")
+	public String showFormForAdd(@PathVariable int hotelId, Model model) {	
+		Room newRoom = new Room();
+	
+		model.addAttribute("room", newRoom);
+		model.addAttribute("hotelId", hotelId);
+		
 		return "room-form";
 	}
 }

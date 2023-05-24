@@ -13,7 +13,7 @@
 	</div>
 	
 	<input type="button" value="Add Room" 
-    onclick="window.location.href='${pageContext.request.contextPath}/room/showFormForAdd'; return false;"
+    onclick="window.location.href='${pageContext.request.contextPath}/room/showFormForAdd/${hotelId}'; return false;"
     class="" /><!-- attribute class needed for style purposes -->
 		
 	<div>
