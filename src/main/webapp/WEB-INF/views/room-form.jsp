@@ -14,9 +14,13 @@
 					<td><label>Capacity:</label></td>
 					<td><form:input path="capacity"/></td>					
 				</tr>
-			
+				
 				<tr>				
-					<td><form:input type="hidden" path="hotel.id" value="${hotelId}"/></td>					
+					<td><form:input type="hidden" path="hotel.id"/></td>					
+				</tr> 
+				
+				<tr>				
+					<td><form:input type="hidden" path="id"/></td>					
 				</tr>
 			
 				<tr>

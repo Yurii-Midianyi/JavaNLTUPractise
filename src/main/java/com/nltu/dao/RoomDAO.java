@@ -7,4 +7,6 @@ public interface RoomDAO {
 	public List<Room> getRooms(int hotelId);
 
 	public void saveRoom(Room room);
+
+	public Room getRoom(int roomId);
 }

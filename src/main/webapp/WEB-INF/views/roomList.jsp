@@ -26,9 +26,13 @@
 			</tr>
 			<c:forEach var="tempRoom" items="${rooms}">
     <!-- create update link for every hotel -->
-    <c:url var="updateLink" value="/hotel/formForUpdate">
-        <c:param name="hotelId" value="${tempRoom.hotel.id}"/>
-    </c:url>
+    
+    <!-- <c:url var="updateLink" value="/room/showformForUpdate">
+        <c:param name="roomId" value="${tempRoom.id}"/>
+    </c:url> -->
+
+	<c:url var ="updateLink" value = "/room/showFormForUpdate/${tempRoom.id}">					
+				</c:url>
 
     <tr>
         <td>${tempRoom.id}</td>

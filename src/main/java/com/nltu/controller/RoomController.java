@@ -53,7 +53,6 @@ public class RoomController {
 	    newRoom.setHotel(hotel);
 		
 		model.addAttribute("room", newRoom);
-		model.addAttribute("hotelId", hotelId);
 		
 		return "room-form";
 	}
@@ -63,5 +62,12 @@ public class RoomController {
 		
 		roomService.saveRoom(theRoom);
 		return "redirect:/room/list/"+theRoom.getHotel().getId();
+	}
+	
+	@GetMapping("/showFormForUpdate/{roomId}")
+	public String showFormForUpdate(@PathVariable int roomId, Model model) {	
+		Room room = roomService.getRoom(roomId);
+		model.addAttribute("room", room);
+		return "room-form";
 	}
 }

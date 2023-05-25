@@ -41,7 +41,13 @@ public class RoomDAOimpl implements RoomDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 						
 		//save the room
-		currentSession.persist(room);
-											
+		currentSession.merge(room);							
+	}
+
+	@Override
+	public Room getRoom(int roomId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Room room = currentSession.get(Room.class, roomId);
+		return room;
 	}
 }

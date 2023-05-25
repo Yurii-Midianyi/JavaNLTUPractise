@@ -40,4 +40,10 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.getRooms(hotelId);
 	}
 
+	@Override
+	@Transactional
+	public Room getRoom(int roomId) {
+		return roomDAO.getRoom(roomId);
+	}
+
 }
