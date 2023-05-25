@@ -25,19 +25,18 @@ public class RoomController {
 	private RoomService roomService;
 	
 	@Autowired
-	private RoomDAO roomDAO; //exchange for service later
-	
-	@Autowired
 	private HotelDAO hotelDAO; //exchange for service later
 		
 	@GetMapping("/list/{hotelId}")
 	public String showList(@PathVariable int hotelId, Model model) {
 		
 		// Retrieve the list of rooms for the specified hotelId
-		List<Room> rooms = roomDAO.getRooms(hotelId);
+		List<Room> rooms = roomService.getRooms(hotelId);
 
 		// Add the list of rooms to the model
 		model.addAttribute("rooms", rooms);
+		
+		// Add the hotelId to the model
 		model.addAttribute("hotelId", hotelId);
 		
 		// Return the view name

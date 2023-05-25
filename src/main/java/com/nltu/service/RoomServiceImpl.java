@@ -1,5 +1,7 @@
 package com.nltu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,12 @@ public class RoomServiceImpl implements RoomService {
 
 	    // Save the room
 	    roomDAO.saveRoom(room);
+	}
+
+	@Override
+	@Transactional
+	public List<Room> getRooms(int hotelId) {
+		return roomDAO.getRooms(hotelId);
 	}
 
 }

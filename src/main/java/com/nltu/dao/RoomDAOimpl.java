@@ -18,7 +18,6 @@ public class RoomDAOimpl implements RoomDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Room> getRooms(int hotelId) {
 		
 		//get current hibernate session
