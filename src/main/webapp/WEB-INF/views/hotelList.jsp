@@ -42,7 +42,7 @@
 <header class="bg-dark py-5">
 	<div class="container px-4 px-lg-5 my-5 pt-5">
 		<div class="text-center text-white">
-			<h1 class="display-4 fw-bolder">Hotel rooms</h1>
+			<h1 class="display-4 fw-bolder">Hotels</h1>
 			<p class="lead fw-normal text-white-50 mb-0 fs-3">Найкращий вибір тільки у нас</p>
 		</div>
 	</div>
@@ -50,132 +50,46 @@
 <section class="py-5">
 	<div class="container px-4 px-lg-5 mt-5">
 		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-			<!-- ПОЧАТОК КАРТКИ -->
-			<div class="col mb-5">
-				<div class="card h-100">
-					<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
-					<div class="card-body p-4">
-						<div class="text-center">
-							<h5 class="card-title fw-bolder fs-3">Назва</h5>
-							<span class="card-text fs-4">Ціна</span>
+			<c:forEach var="tempHotel" items="${hotels}">
+				<!-- ПОЧАТОК КАРТКИ -->
+					<div class="col mb-5">
+						<div class="card h-100">
+							<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
+							<div class="card-body p-4">
+								<div class="text-center">
+									<h5 class="card-title fw-bolder fs-3">${tempHotel.id}. ${tempHotel.name}</h5>
+									<span class="card-text fs-4">${tempHotel.country}</span>
+								</div>
+							</div>
+							<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
+								<div class="text-center">
+									<a class="btn btn-outline-secondary mt-auto fs-5" href="#">Переглянути</a>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-secondary mt-auto fs-5" href="#">
-								Замовити
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- КІНЕЦЬ КАРТКИ -->
-			<!-- ПОЧАТОК КАРТКИ -->
-			<div class="col mb-5">
-				<div class="card h-100">
-					<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
-					<div class="card-body p-4">
-						<div class="text-center">
-							<h5 class="card-title fw-bolder fs-3">Назва</h5>
-							<span class="card-text fs-4">Ціна</span>
-						</div>
-					</div>
-					<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-secondary mt-auto fs-5" href="#">
-								Замовити
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- КІНЕЦЬ КАРТКИ -->
-			<!-- ПОЧАТОК КАРТКИ -->
-			<div class="col mb-5">
-				<div class="card h-100">
-					<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
-					<div class="card-body p-4">
-						<div class="text-center">
-							<h5 class="card-title fw-bolder fs-3">Назва</h5>
-							<span class="card-text fs-4">Ціна</span>
-						</div>
-					</div>
-					<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-secondary mt-auto fs-5" href="#">
-								Замовити
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- КІНЕЦЬ КАРТКИ -->
-			<!-- ПОЧАТОК КАРТКИ -->
-			<div class="col mb-5">
-				<div class="card h-100">
-					<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
-					<div class="card-body p-4">
-						<div class="text-center">
-							<h5 class="card-title fw-bolder fs-3">Назва</h5>
-							<span class="card-text fs-4">Ціна</span>
-						</div>
-					</div>
-					<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-secondary mt-auto fs-5" href="#">
-								Замовити
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- КІНЕЦЬ КАРТКИ -->
-			<!-- ПОЧАТОК КАРТКИ -->
-			<div class="col mb-5">
-				<div class="card h-100">
-					<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
-					<div class="card-body p-4">
-						<div class="text-center">
-							<h5 class="card-title fw-bolder fs-3">Назва</h5>
-							<span class="card-text fs-4">Ціна</span>
-						</div>
-					</div>
-					<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-secondary mt-auto fs-5" href="#">
-								Замовити
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- КІНЕЦЬ КАРТКИ -->
+				<!-- КІНЕЦЬ КАРТКИ -->
+			</c:forEach>
 		</div>
 	</div>
 </section>
-<p>Hotel page</p>
-<h1>CSS test</h1>
-
-	<div>
-		<h2>Test</h2>
-	</div>
 	
-	<div>
-		<table>
+<div>
+	<table>
+		<tr>
+			<th>id</th>
+			<th>name</th>
+			<th>country</th>
+		</tr>
+		<c:forEach var="tempHotel" items="${hotels}">
 			<tr>
-				<th>id</th>
-				<th>name</th>
-				<th>country</th>
+				<td>${tempHotel.id}</td>
+				<td>${tempHotel.name}</td>
+				<td>${tempHotel.country}</td>
 			</tr>
-			<c:forEach var="tempHotel" items="${hotels}">
-				<tr>
-					<td>${tempHotel.id}</td>
-					<td>${tempHotel.name}</td>
-					<td>${tempHotel.country}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
+		</c:forEach>
+	</table>
+</div>
 	
 </body>
 </html>
