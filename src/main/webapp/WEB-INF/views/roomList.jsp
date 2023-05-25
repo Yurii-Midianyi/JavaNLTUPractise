@@ -30,17 +30,11 @@
         <c:param name="hotelId" value="${tempRoom.hotel.id}"/>
     </c:url>
 
-    <!-- create link to get list of rooms for every hotel -->
-    <c:url var="roomListLink" value="/room/list">
-        <c:param name="hotelId" value="${tempRoom.hotel.id}"/>
-    </c:url>
-
     <tr>
         <td>${tempRoom.id}</td>
         <td>${tempRoom.capacity}</td>
         <td>${tempRoom.hotel.id}</td> <!-- Access hotel's id -->
-        <td>
-            <a href="${roomListLink}">Rooms</a>
+        <td>           
             <a href="${updateLink}">Update</a>
         </td>
     </tr>  
