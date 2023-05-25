@@ -50,4 +50,14 @@ public class RoomDAOimpl implements RoomDAO {
 		Room room = currentSession.get(Room.class, roomId);
 		return room;
 	}
+
+	@Override
+	public void deleteRoom(int roomId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Room room = currentSession.get(Room.class, roomId);
+		
+		currentSession.remove(room);
+	}
+	
 }

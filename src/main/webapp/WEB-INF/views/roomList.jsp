@@ -25,14 +25,14 @@
 				<th>action</th>
 			</tr>
 			<c:forEach var="tempRoom" items="${rooms}">
+			
     <!-- create update link for every hotel -->
-    
-    <!-- <c:url var="updateLink" value="/room/showformForUpdate">
-        <c:param name="roomId" value="${tempRoom.id}"/>
-    </c:url> -->
-
 	<c:url var ="updateLink" value = "/room/showFormForUpdate/${tempRoom.id}">					
-				</c:url>
+	</c:url>
+	
+	<!-- create a delete link for every hotel -->
+	<c:url var ="deleteLink" value = "/room/delete/${tempRoom.id}">					
+	</c:url>
 
     <tr>
         <td>${tempRoom.id}</td>
@@ -40,6 +40,10 @@
         <td>${tempRoom.hotel.id}</td> <!-- Access hotel's id -->
         <td>           
             <a href="${updateLink}">Update</a>
+            |
+            <a href="${deleteLink}"
+            onclick="if (!(confirm('Are you sure you want to delete this room?'))) return false">
+            	Delete</a>
         </td>
     </tr>  
 </c:forEach>

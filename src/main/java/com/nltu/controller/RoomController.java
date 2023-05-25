@@ -70,4 +70,14 @@ public class RoomController {
 		model.addAttribute("room", room);
 		return "room-form";
 	}
+	
+	@GetMapping("/delete/{roomId}")
+	public String deleteRoom(@PathVariable int roomId, Model model) {	
+		
+		Room room = roomService.getRoom(roomId);
+		int hotelId = room.getHotel().getId(); //to redirect to the right page
+		roomService.deleteRoom(roomId);
+		
+		return "redirect:/room/list/"+hotelId;
+	}
 }

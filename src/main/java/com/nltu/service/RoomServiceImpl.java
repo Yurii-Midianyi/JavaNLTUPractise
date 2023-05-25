@@ -46,4 +46,9 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.getRoom(roomId);
 	}
 
+	@Override
+	@Transactional
+	public void deleteRoom(int roomId) {
+		roomDAO.deleteRoom(roomId);
+	}
 }
