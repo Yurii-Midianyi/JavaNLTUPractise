@@ -5,4 +5,12 @@ import com.nltu.entity.Hotel;
 
 public interface HotelDAO {
 	public List<Hotel> getHotels();
+
+	Hotel show(int id);
+
+	void save(Hotel hotel);
+
+	 void update(int id, Hotel updateHotel);
+
+	 void delete(int id);
 }

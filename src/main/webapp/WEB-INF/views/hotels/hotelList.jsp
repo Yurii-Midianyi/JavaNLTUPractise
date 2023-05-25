@@ -90,7 +90,7 @@
 		</c:forEach>
 	</table>
 </div>
-	
+
 </body>
 </html>
- 
+<%--<a href="/hotels/${hotel.getID()}"> ${tempHotel.id} </a>--%>

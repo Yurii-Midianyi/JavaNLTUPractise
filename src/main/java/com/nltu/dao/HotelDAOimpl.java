@@ -13,9 +13,12 @@ import com.nltu.entity.Hotel;
 @Repository
 public class HotelDAOimpl implements HotelDAO {
 
+	private final SessionFactory sessionFactory;
 	@Autowired
-	private SessionFactory sessionFactory;
-	
+	public HotelDAOimpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	@Override
 	@Transactional
 	public List<Hotel> getHotels() {
@@ -32,6 +35,32 @@ public class HotelDAOimpl implements HotelDAO {
 		
 		//return the results
 		return hotels;
+	}
+
+	@Transactional(readOnly = true)
+	public Hotel show (int id){
+		Session session = sessionFactory.getCurrentSession();
+		return session.get(Hotel.class, id);
+	}
+
+	@Transactional
+	public void save(Hotel hotel) {
+      Session session = sessionFactory.getCurrentSession();
+	  session.save(hotel);
+	}
+
+	@Transactional
+	public void update(int id, Hotel updateHotel) {
+     Session session = sessionFactory.getCurrentSession();
+	 Hotel hotelToBeUpdated = session.get(Hotel.class, id);
+
+	 hotelToBeUpdated.setName(updateHotel.getName());
+	}
+
+    @Transactional
+	public void delete(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		session.remove(session.get(Hotel.class, id));
 	}
 
 }
