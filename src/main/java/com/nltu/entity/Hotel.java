@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 public class Hotel {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="hotel_name")
@@ -29,6 +29,7 @@ public class Hotel {
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
 	private Country country;
+
 	
 	@OneToMany(mappedBy ="hotel",
 			   cascade = {CascadeType.PERSIST, CascadeType.MERGE,
@@ -69,8 +70,6 @@ public class Hotel {
 		this.country = country;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "Hotel [id=" + id + ", name=" + hotelName + ", country=" + country + ", rooms=" + rooms + "]";
