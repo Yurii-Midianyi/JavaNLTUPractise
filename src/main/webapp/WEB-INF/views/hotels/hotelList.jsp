@@ -57,7 +57,7 @@
 							<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
 							<div class="card-body p-4">
 								<div class="text-center">
-									<h5 class="card-title fw-bolder fs-3">${tempHotel.id}. ${tempHotel.name}</h5>
+									<h5 class="card-title fw-bolder fs-3">${tempHotel.id}. ${tempHotel.hotelName}</h5>
 									<span class="card-text fs-4">${tempHotel.country}</span>
 								</div>
 							</div>
@@ -84,7 +84,7 @@
 		<c:forEach var="tempHotel" items="${hotels}">
 			<tr>
 				<td>${tempHotel.id}</td>
-				<td>${tempHotel.name}</td>
+				<td>${tempHotel.hotelName}</td>
 				<td>${tempHotel.country}</td>
 			</tr>
 		</c:forEach>

@@ -7,7 +7,7 @@
 <body>
 <form method="POST" action="/hotel">
     <label for="name">Enter name: </label>
-    <input type="text" name="name" id="name"/>
+    <input type="text" name="hotelName" id="name"/>
     <br/>
     <input type="submit" value="Create!"/>
 </form>

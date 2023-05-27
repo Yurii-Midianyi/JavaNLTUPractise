@@ -37,6 +37,25 @@ public class HotelDAOimpl implements HotelDAO {
 		return hotels;
 	}
 
+
+	@Override
+	@Transactional
+	public Hotel getHotel(int id) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+//		//create a query
+//		Query<Hotel> theQuery = 
+//				currentSession.createQuery("from Hotel WHERE id = "+id, Hotel.class);
+//		
+//		//execute query and get result list
+//		Hotel hotel = theQuery.getSingleResult();
+//		
+//		//return the results
+//		return hotel;
+		
+		return currentSession.get(Hotel.class, id);
+	}
+
 	@Transactional(readOnly = true)
 	public Hotel show (int id){
 		Session session = sessionFactory.getCurrentSession();
@@ -54,13 +73,13 @@ public class HotelDAOimpl implements HotelDAO {
      Session session = sessionFactory.getCurrentSession();
 	 Hotel hotelToBeUpdated = session.get(Hotel.class, id);
 
-	 hotelToBeUpdated.setName(updateHotel.getName());
+	 hotelToBeUpdated.setHotelName(updateHotel.getHotelName());
 	}
 
     @Transactional
 	public void delete(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.remove(session.get(Hotel.class, id));
-	}
 
+	}
 }

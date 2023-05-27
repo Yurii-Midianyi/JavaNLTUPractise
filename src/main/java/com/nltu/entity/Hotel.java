@@ -6,9 +6,12 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,10 +24,12 @@ public class Hotel {
 	private int id;
 	
 	@Column(name="hotel_name")
-	private String name;
+	private String hotelName;
 	
-	@Column(name="country_id")
-	private String country;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_id")
+	private Country country;
+
 	
 	@OneToMany(mappedBy ="hotel",
 			   cascade = {CascadeType.PERSIST, CascadeType.MERGE,
@@ -32,11 +37,6 @@ public class Hotel {
 	private List<Room> rooms;
 	
 	public Hotel() {}
-
-	public Hotel(String name, String country) {
-		this.name = name;
-		this.country = country;
-	}
 
 	public int getId() {
 		return id;
@@ -46,20 +46,12 @@ public class Hotel {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getHotelName() {
+		return hotelName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
 	}
 
 	public List<Room> getRooms() {
@@ -70,11 +62,19 @@ public class Hotel {
 		this.rooms = rooms;
 	}
 
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 	@Override
 	public String toString() {
-		return "Hotel [id=" + id + ", name=" + name + ", country=" + country + "]";
+		return "Hotel [id=" + id + ", name=" + hotelName + ", country=" + country + ", rooms=" + rooms + "]";
 	}
-	
+
 	public void add(Room tempRoom) {
 		if(rooms == null) {
 			rooms = new ArrayList<>();

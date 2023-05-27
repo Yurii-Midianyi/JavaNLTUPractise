@@ -1,6 +1,5 @@
 package com.nltu.entity;
 
-import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,12 +19,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
-	private LocalDate bookedSince;
-	
-	@Column
-	private LocalDate bookedTo;
-	
+	@Column(name="capacity")
+	private int capacity;
+
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="hotel_id")
@@ -41,22 +37,6 @@ public class Room {
 		this.id = id;
 	}
 
-	public LocalDate getBookedSince() {
-		return bookedSince;
-	}
-
-	public void setBookedSince(LocalDate bookedSince) {
-		this.bookedSince = bookedSince;
-	}
-
-	public LocalDate getBookedTo() {
-		return bookedTo;
-	}
-
-	public void setBookedTo(LocalDate bookedTo) {
-		this.bookedTo = bookedTo;
-	}
-
 	public Hotel getHotel() {
 		return hotel;
 	}
@@ -65,9 +45,17 @@ public class Room {
 		this.hotel = hotel;
 	}
 
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", bookedSince=" + bookedSince + ", bookedTo=" + bookedTo + ", hotel=" + hotel + "]";
+		return "Room [id=" + id + ", capacity=" + capacity + "]";
 	}
 		
 }

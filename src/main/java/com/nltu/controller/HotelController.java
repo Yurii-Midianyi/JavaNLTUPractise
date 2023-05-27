@@ -14,6 +14,7 @@ import com.nltu.entity.Hotel;
 public class HotelController {
 	
 	private final HotelDAO hotelDAO;
+	
 	@Autowired
 	public HotelController(HotelDAO hotelDAO) {
 		this.hotelDAO = hotelDAO;
