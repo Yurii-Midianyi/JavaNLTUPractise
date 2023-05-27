@@ -5,7 +5,7 @@
     <title>Hotel</title>
 </head>
 <body>
-<p>${hotel.getName()}</p>
+<p>${hotel.getHotelName()}</p>
 <p>${hotel.getId()}</p>
 
 <a href="/hotel/${hotel.getId()}/edit?id=${hotel.getId()}">Edit</a>
