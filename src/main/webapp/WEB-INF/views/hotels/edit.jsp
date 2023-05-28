@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method="POST" action="${pageContext.request.contextPath}/hotel/${hotel.getId()}">
+<form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
     <input type="hidden" name="_method" value="PATCH">
     <label for="name">Enter name: </label>
     <input type="text" name="hotelName" id="name"/>

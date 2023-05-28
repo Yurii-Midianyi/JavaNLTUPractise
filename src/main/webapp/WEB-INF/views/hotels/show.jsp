@@ -5,12 +5,12 @@
     <title>Hotel</title>
 </head>
 <body>
-<p>${hotel.getHotelName()}</p>
-<p>${hotel.getId()}</p>
+<p>${hotel.hotelName}</p>
+<p>${hotel.id}</p>
 
-<a href="/hotel/${hotel.getId()}/edit?id=${hotel.getId()}">Edit</a>
+<a href="<c:url value="/hotel/${hotel.id}/edit" />">Edit</a>
 
-<form method="POST" action="/hotel/${hotel.getId()}/?id=${hotel.getId()}">
+<form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete"/>
 </form>
