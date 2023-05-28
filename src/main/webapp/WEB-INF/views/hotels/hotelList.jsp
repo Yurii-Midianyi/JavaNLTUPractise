@@ -63,7 +63,8 @@
 							</div>
 							<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
 								<div class="text-center">
-									<a class="btn btn-outline-secondary mt-auto fs-5" href="#">Переглянути</a>
+									<a class="btn btn-outline-secondary mt-auto fs-5"
+									   href="<c:url value="/hotel/${tempHotel.id}" />">Переглянути</a>
 								</div>
 							</div>
 						</div>
@@ -73,6 +74,10 @@
 		</div>
 	</div>
 </section>
+
+<div>
+	<a href="<c:url value="/hotel/new" />">add new hotel</a>
+</div>
 	
 <div>
 	<table>

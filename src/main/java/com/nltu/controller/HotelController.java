@@ -20,7 +20,7 @@ public class HotelController {
 		this.hotelDAO = hotelDAO;
 	}
 
-	@GetMapping
+	@GetMapping("/list")
 	public String listCustomers(Model model) {
 		//get hotels from the dao
 		List<Hotel> theHotels = hotelDAO.getHotels();
@@ -42,10 +42,10 @@ public class HotelController {
 		model.addAttribute("hotel", new Hotel());
 		return "/hotels/new";
 	}
-	@PostMapping
+	@PostMapping("/list")
 	public String create(@ModelAttribute("hotel") Hotel hotel){
 		hotelDAO.save(hotel);
-		return "redirect:/hotel";
+		return "redirect:/hotel/list";
 	}
 
 	@GetMapping("/{id}/edit")
@@ -58,13 +58,13 @@ public class HotelController {
 	public String update(@ModelAttribute("hotel") Hotel hotel,
 						 @PathVariable("id") int id){
 		hotelDAO.update(id, hotel);
-		return "redirect:/hotel";
+		return "redirect:/hotel/list";
 	}
 
 	@DeleteMapping("/{id}")
 	public String delete (@PathVariable("id") int id){
 		hotelDAO.delete(id);
-		return "redirect:/hotel";
+		return "redirect:/hotel/list";
 	}
 
 }

@@ -5,7 +5,7 @@
     <title>New hotel</title>
 </head>
 <body>
-<form method="POST" action="/hotel">
+<form method="POST" action="<c:url value="/hotel/list" />">
     <label for="name">Enter name: </label>
     <input type="text" name="hotelName" id="name"/>
     <br/>
