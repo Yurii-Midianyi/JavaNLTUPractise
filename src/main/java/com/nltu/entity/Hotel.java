@@ -30,7 +30,6 @@ public class Hotel {
     @JoinColumn(name = "country_id")
 	private Country country;
 
-	
 	@OneToMany(mappedBy ="hotel",
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE,
 					CascadeType.DETACH, CascadeType.REFRESH},
