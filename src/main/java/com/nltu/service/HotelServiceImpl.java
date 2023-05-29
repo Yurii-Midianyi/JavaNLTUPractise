@@ -1,11 +1,11 @@
 package com.nltu.service;
 
+import com.nltu.dao.HotelDAO;
 import com.nltu.entity.Hotel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,15 +15,16 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService{
 
     private final SessionFactory sessionFactory;
-
+    private HotelDAO hotelDAO;
     @Autowired
-    public HotelServiceImpl(SessionFactory sessionFactory) {
+    public HotelServiceImpl(SessionFactory sessionFactory, HotelDAO hotelDAO) {
         this.sessionFactory = sessionFactory;
+        this.hotelDAO = hotelDAO;
     }
 
     @Override
     @Transactional
-    public List<Hotel> getHotels() {
+    public List<Hotel> getHotels() { // i didn`t change it, bcz i don`t understand it
         //get current hibernate session
         Session currentSession = sessionFactory.getCurrentSession();
 
@@ -41,37 +42,30 @@ public class HotelServiceImpl implements HotelService{
     @Override
     @Transactional
     public Hotel getHotel(int id) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        return currentSession.get(Hotel.class, id);
+        return hotelDAO.getHotel(id);
     }
 
     @Override
     @Transactional
     public Hotel show(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(Hotel.class, id);
+        return hotelDAO.show(id);
     }
 
     @Override
     @Transactional
     public void save(Hotel hotel) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(hotel);
+        hotelDAO.save(hotel);
     }
 
     @Override
     @Transactional
     public void update(int id, Hotel updateHotel) {
-        Session session = sessionFactory.getCurrentSession();
-        Hotel hotelToBeUpdated = session.get(Hotel.class, id);
-
-        hotelToBeUpdated.setHotelName(updateHotel.getHotelName());
+       hotelDAO.update(id, updateHotel);
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        session.remove(session.get(Hotel.class, id));
+        hotelDAO.delete(id);
     }
 }
