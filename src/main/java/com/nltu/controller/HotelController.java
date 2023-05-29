@@ -2,6 +2,7 @@ package com.nltu.controller;
 
 import java.util.List;
 
+import com.nltu.dao.CountryDAO;
 import com.nltu.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import com.nltu.entity.Hotel;
 public class HotelController {
 	
 	private HotelService hotelService;
+	private CountryDAO countryDAO;
 	
 	@Autowired
-	public HotelController(HotelService hotelService) {
+	public HotelController(HotelService hotelService, CountryDAO countryDAO) {
 		this.hotelService = hotelService;
+		this.countryDAO = countryDAO;
 	}
 
 	@GetMapping("/list")
@@ -28,7 +31,7 @@ public class HotelController {
 		System.out.println(theHotels);
 		//add the hotels to the model
 		model.addAttribute("hotels", theHotels);
-		
+		countryDAO.findHotelsByCountry();
 		return "hotels/hotelList";
 	}
 
