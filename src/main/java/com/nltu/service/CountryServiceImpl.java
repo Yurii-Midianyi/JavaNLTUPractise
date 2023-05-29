@@ -38,8 +38,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
-    public void updateCountry(int id, Country country) {
-        countryDAO.updateCountry(id, country);
+    public void updateCountry(Country country) {
+        countryDAO.updateCountry(country);
     }
 
     @Override

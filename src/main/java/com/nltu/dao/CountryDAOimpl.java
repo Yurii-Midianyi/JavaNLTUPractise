@@ -46,7 +46,7 @@ public class CountryDAOimpl implements CountryDAO {
     }
 
     @Override
-    public void updateCountry(int id, Country country) {
+    public void updateCountry(Country country) {
         Session currentSession = sessionFactory.getCurrentSession();
 
         currentSession.update(country);

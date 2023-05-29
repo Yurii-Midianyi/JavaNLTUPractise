@@ -54,8 +54,8 @@ public class CountriesController {
     }
 
     @PatchMapping("/{id}")
-    public String updateCountry(@ModelAttribute("country") Country country, @PathVariable("id") int id) {
-        countryService.updateCountry(id, country);
+    public String updateCountry(@ModelAttribute("country") Country country) {
+        countryService.updateCountry(country);
         return "redirect:/countries";
     }
 
