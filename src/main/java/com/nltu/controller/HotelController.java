@@ -2,6 +2,7 @@ package com.nltu.controller;
 
 import java.util.List;
 
+import com.nltu.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +14,17 @@ import com.nltu.entity.Hotel;
 @RequestMapping("/hotel")
 public class HotelController {
 	
-	private final HotelDAO hotelDAO;
+	private HotelService hotelService;
 	
 	@Autowired
-	public HotelController(HotelDAO hotelDAO) {
-		this.hotelDAO = hotelDAO;
+	public HotelController(HotelService hotelService) {
+		this.hotelService = hotelService;
 	}
 
 	@GetMapping("/list")
 	public String listCustomers(Model model) {
 		//get hotels from the dao
-		List<Hotel> theHotels = hotelDAO.getHotels();
+		List<Hotel> theHotels = hotelService.getHotels();
 		System.out.println(theHotels);
 		//add the hotels to the model
 		model.addAttribute("hotels", theHotels);
@@ -33,7 +34,7 @@ public class HotelController {
 
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model){
-		model.addAttribute("hotel", hotelDAO.show(id));
+		model.addAttribute("hotel", hotelService.show(id));
         return "hotels/show";
 	}
 
@@ -44,26 +45,26 @@ public class HotelController {
 	}
 	@PostMapping("/list")
 	public String create(@ModelAttribute("hotel") Hotel hotel){
-		hotelDAO.save(hotel);
+		hotelService.save(hotel);
 		return "redirect:/hotel/list";
 	}
 
 	@GetMapping("/{id}/edit")
 	public String edit (Model model , @PathVariable("id") int id){
-		model.addAttribute("hotel", hotelDAO.show(id));
+		model.addAttribute("hotel", hotelService.show(id));
 		return "hotels/edit";
 	}
 
 	@PatchMapping("/{id}")
 	public String update(@ModelAttribute("hotel") Hotel hotel,
 						 @PathVariable("id") int id){
-		hotelDAO.update(id, hotel);
+		hotelService.update(id, hotel);
 		return "redirect:/hotel/list";
 	}
 
 	@DeleteMapping("/{id}")
 	public String delete (@PathVariable("id") int id){
-		hotelDAO.delete(id);
+		hotelService.delete(id);
 		return "redirect:/hotel/list";
 	}
 
