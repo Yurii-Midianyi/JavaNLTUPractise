@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.nltu.entity.Hotel;
 
+import jakarta.transaction.Transactional;
+
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
@@ -24,10 +26,12 @@ public class HotelController {
 	}
 
 	@GetMapping("/list")
+	@Transactional
 	public String listCustomers(Model model) {
-		//get hotels from the dao
 		List<Hotel> theHotels = hotelService.getHotels();
-		System.out.println(theHotels);
+		
+		//resolve issue with Lazy loading
+		theHotels.toString();
 		//add the hotels to the model
 		model.addAttribute("hotels", theHotels);
 		countryService.findHotelsByCountry();

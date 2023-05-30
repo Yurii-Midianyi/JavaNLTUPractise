@@ -1,6 +1,8 @@
 package com.nltu.entity;
 
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +21,9 @@ public class Room {
 	@JoinColumn(name="hotel_id")
 	private Hotel hotel;
 
+	@OneToMany(mappedBy="room", cascade=CascadeType.ALL)
+	private List<Booking> bookings;
+	
 	public Room() {}
 	
 	public int getId() {
@@ -43,6 +48,14 @@ public class Room {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
+	}
+	
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
 
 	@Override
