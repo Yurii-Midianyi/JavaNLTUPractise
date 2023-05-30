@@ -23,7 +23,12 @@
 hs_err_pid*
 replay_pid*
 
-.idea
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
 target/
 .settings/
 .classpath
