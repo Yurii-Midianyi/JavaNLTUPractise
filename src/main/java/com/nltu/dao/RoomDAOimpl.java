@@ -2,6 +2,7 @@ package com.nltu.dao;
 
 import java.util.List;
 
+import com.nltu.entity.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -59,5 +60,14 @@ public class RoomDAOimpl implements RoomDAO {
 		
 		currentSession.remove(room);
 	}
-	
+
+	@Override
+	public List<Room> getRooms() {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<Room> theQuery =
+				currentSession.createQuery("from Room", Room.class);
+
+		return theQuery.getResultList();
+	}
 }
