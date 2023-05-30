@@ -11,7 +11,7 @@
 <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
     <input type="hidden" name="_method" value="PATCH">
     <label for="name">Enter name: </label>
-    <input type="text" name="hotelName" id="name"/>
+    <input type="text" name="hotelName" id="name" value="${hotel.hotelName}"/>
     <br/>
     <input type="submit" value="Update"/>
 </form>

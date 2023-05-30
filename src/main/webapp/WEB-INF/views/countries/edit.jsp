@@ -8,7 +8,7 @@
 <form method="POST" action="<c:url value="/countries/${country.id}" />">
     <input type="hidden" name="_method" value="PATCH">
     <label for="name">Enter name: </label>
-    <input type="text" name="countryName" id="name"/>
+    <input type="text" name="countryName" id="name" value="${country.countryName}"/>
     <br/>
     <input type="submit" value="Update"/>
 </form>
