@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 public class Country {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	

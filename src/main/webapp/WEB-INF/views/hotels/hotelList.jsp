@@ -50,21 +50,21 @@
 <section class="py-5">
 	<div class="container px-4 px-lg-5 mt-5">
 		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-			<c:forEach var="tempHotel" items="${hotels}">
+			<c:forEach var="hotels" items="${hotels}">
 				<!-- ПОЧАТОК КАРТКИ -->
 					<div class="col mb-5">
 						<div class="card h-100">
 							<img class="card-img-top" src="https://dummyimage.com/450x300" alt="..." />
 							<div class="card-body p-4">
 								<div class="text-center">
-									<h5 class="card-title fw-bolder fs-3">${tempHotel.id}. ${tempHotel.hotelName}</h5>
-									<span class="card-text fs-4">${tempHotel.country}</span>
+									<h5 class="card-title fw-bolder fs-3">${hotels.id}. ${hotels.hotelName}</h5>
+									<span class="card-text fs-4">${hotels.country}</span>
 								</div>
 							</div>
 							<div class="card-footer p-4 pt-1 border-top-0 bg-transparent">
 								<div class="text-center">
 									<a class="btn btn-outline-secondary mt-auto fs-5"
-									   href="<c:url value="/hotel/${tempHotel.id}" />">Переглянути</a>
+									   href="<c:url value="/hotel/${hotels.id}" />">Переглянути</a>
 								</div>
 							</div>
 						</div>
@@ -95,7 +95,6 @@
 		</c:forEach>
 	</table>
 </div>
-
 </body>
 </html>
 <%--<a href="/hotels/${hotel.getID()}"> ${tempHotel.id} </a>--%>
