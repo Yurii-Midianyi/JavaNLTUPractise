@@ -21,7 +21,7 @@ public class Room {
 	@JoinColumn(name="hotel_id")
 	private Hotel hotel;
 
-	@OneToMany(mappedBy="room")
+	@OneToMany(mappedBy="room", cascade=CascadeType.ALL)
 	private List<Booking> bookings;
 	
 	public Room() {}

@@ -31,13 +31,13 @@ public class User {
 	@Column(name="enabled")
 	private boolean enabled;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = 
 					{CascadeType.PERSIST, CascadeType.MERGE,
 					CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "role_id")
 	private Role role;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Booking> bookings;
 	
 	User(){}

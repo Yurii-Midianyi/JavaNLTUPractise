@@ -22,4 +22,9 @@ public class BookingServiceImpl implements BookingService {
 		return bookingDAO.getAllBookings();
 	}
 
+	@Override
+	public void saveBooking(Booking booking) {
+		bookingDAO.saveBooking(booking);
+	}
+
 }

@@ -26,15 +26,14 @@ public class Hotel {
 	@Column(name="hotel_name")
 	private String hotelName;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
 	private Country country;
 
 	
 	@OneToMany(mappedBy ="hotel",
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-					CascadeType.DETACH, CascadeType.REFRESH},
-			fetch = FetchType.EAGER)
+					CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Room> rooms;
 	
 	public Hotel() {}

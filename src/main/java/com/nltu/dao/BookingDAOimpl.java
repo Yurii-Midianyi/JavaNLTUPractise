@@ -33,5 +33,10 @@ public class BookingDAOimpl implements BookingDAO{
 		//return the results
 		return bookings;
 	}
-	
+
+	@Override
+	public void saveBooking(Booking booking) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.merge(booking);		
+	}
 }
