@@ -2,6 +2,7 @@ package com.nltu.service;
 
 import com.nltu.dao.CountryDAO;
 import com.nltu.entity.Country;
+import com.nltu.entity.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,10 +49,11 @@ public class CountryServiceImpl implements CountryService {
         countryDAO.deleteCountry(id);
     }
 
+
     @Override
     @Transactional
-    public void findHotelsByCountry(int id) {
-        countryDAO.findHotelsByCountry(id);
+    public List<Country> findHotelsByCountry(int id) {
+        return countryDAO.findHotelsByCountry(id);
     }
 
 

@@ -1,5 +1,6 @@
 package com.nltu.controller;
 
+import com.nltu.dao.CountryDAOimpl;
 import com.nltu.entity.Country;
 import com.nltu.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
 	private final CountryService countryService;
+	private final CountryDAOimpl countryDAOimpl;
 
 	@Autowired
-	public HomeController(CountryService countryService) {
+	public HomeController(CountryService countryService, CountryDAOimpl countryDAOimpl) {
 		this.countryService = countryService;
+		this.countryDAOimpl = countryDAOimpl;
 	}
 
 
@@ -34,10 +36,11 @@ public class HomeController {
 	}
 
 	@GetMapping("/result")
-	public String result(@ModelAttribute("country")Country country){
+	public String result(Model model ,@ModelAttribute("country")Country country){
+		model.addAttribute("countries", countryService.findHotelsByCountry(country.getId()));
 		System.out.println(country.getId());
 		countryService.findHotelsByCountry(country.getId());
-		return "redirect:/home";
+		return "result";
 	}
 
 
