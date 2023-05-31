@@ -38,8 +38,6 @@ public class HomeController {
 	@GetMapping("/result")
 	public String result(Model model ,@ModelAttribute("country")Country country){
 		model.addAttribute("countries", countryService.findHotelsByCountry(country.getId()));
-		System.out.println(country.getId());
-		countryService.findHotelsByCountry(country.getId());
 		return "result";
 	}
 

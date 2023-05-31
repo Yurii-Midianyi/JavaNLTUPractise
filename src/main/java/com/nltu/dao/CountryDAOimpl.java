@@ -65,8 +65,8 @@ public class CountryDAOimpl implements CountryDAO {
         Session session = sessionFactory.getCurrentSession();
 
         List<Country> countries = session.createQuery("select c from Country c left join fetch c.hotels where c.id = :countryId ", Country.class )
-                .setParameter("countryId", id)
-                .getResultList();
+            .setParameter("countryId", id)
+            .getResultList();
 
 
         for (Country country : countries) {
@@ -75,4 +75,3 @@ public class CountryDAOimpl implements CountryDAO {
         return countries;
     }
 }
-
