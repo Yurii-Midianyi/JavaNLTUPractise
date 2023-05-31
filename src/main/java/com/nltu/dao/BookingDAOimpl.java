@@ -39,4 +39,14 @@ public class BookingDAOimpl implements BookingDAO{
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.merge(booking);		
 	}
+
+	@Override
+	public List<Booking> getBookingsByUserId(int userId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<Booking> theQuery =
+				currentSession.createQuery("from Booking where user.id = " + userId, Booking.class);
+
+		return theQuery.getResultList();
+	}
 }

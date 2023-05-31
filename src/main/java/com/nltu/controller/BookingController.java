@@ -21,10 +21,10 @@ import jakarta.transaction.Transactional;
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
-	
+
 	@Autowired
 	private BookingService bookingService;
-	
+
 	@GetMapping("/list")
 	@Transactional
 	public String getAllBookings(Model model) {	
@@ -46,6 +46,15 @@ public class BookingController {
 		
 		bookingService.saveBooking(booking);
 		return "redirect:/booking/list";
+	}
+
+	@GetMapping("/list/{userId}")
+	@Transactional
+	public String showListForUser(@PathVariable int userId, Model model) {
+		List<Booking> bookings = bookingService.getBookingsByUserId(userId);
+		bookings.toString();
+		model.addAttribute("bookings", bookings);
+		return "bookingList";
 	}
 	
 }

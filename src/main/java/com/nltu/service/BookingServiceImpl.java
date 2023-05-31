@@ -23,8 +23,14 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
+	@Transactional
 	public void saveBooking(Booking booking) {
 		bookingDAO.saveBooking(booking);
 	}
 
+	@Override
+	@Transactional
+	public List<Booking> getBookingsByUserId(int userId) {
+		return bookingDAO.getBookingsByUserId(userId);
+	}
 }
