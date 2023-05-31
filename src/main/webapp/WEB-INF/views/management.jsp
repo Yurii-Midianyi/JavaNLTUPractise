@@ -106,50 +106,17 @@
                             <input type="submit" value="Delete">
                         </form>
                     </td>
+                    <td>
+                        <form method="GET" action="<c:url value="/room/list/${hotel.id}" />">
+                            <input type="submit" value="Show rooms">
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
     </div>
     <div>
         <form method="GET" action="<c:url value="/hotel/new" />">
-            <input type="submit" value="Add new hotel">
-        </form>
-    </div>
-</div>
-<div>
-    <div>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>capacity</th>
-                <th>hotel</th>
-            </tr>
-            <c:forEach var="room" items="${rooms}">
-                <tr>
-                    <td>${room.id}</td>
-                    <td>${room.capacity}</td>
-                    <td>${room.hotel.hotelName}</td>
-                    <td>
-                        <form method="GET" action="">
-                            <input type="submit" value="Show">
-                        </form>
-                    </td>
-                    <td>
-                        <form method="GET" action="<c:url value="/room/showFormForUpdate/${room.id}" />">
-                            <input type="submit" value="Update">
-                        </form>
-                    </td>
-                    <td>
-                        <form method="GET" action="<c:url value="/room/${room.id}/delete" />">
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
-    <div>
-        <form method="GET" action="">
             <input type="submit" value="Add new hotel">
         </form>
     </div>
