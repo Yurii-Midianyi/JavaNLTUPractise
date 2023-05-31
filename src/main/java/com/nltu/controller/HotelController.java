@@ -31,7 +31,6 @@ public class HotelController {
 		System.out.println(theHotels);
 		//add the hotels to the model
 		model.addAttribute("hotels", theHotels);
-		countryDAO.findHotelsByCountry();
 		return "hotels/hotelList";
 	}
 

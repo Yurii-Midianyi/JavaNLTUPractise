@@ -1,5 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -42,5 +44,18 @@
 </nav>
 <p>Home page</p>
 <h1>CSS test</h1>
+
+<p>new</p>
+<form:form action="${pageContext.request.contextPath}/new" modelAttribute="countries" method="POST">
+	<label for="country">Choose country</label>
+	<select id="country">
+		 <c:forEach var="country" items="${countries}">
+	       <option value="${country.id}" text="" >${country.countryName}</option>
+	</c:forEach>
+	</select>
+</form:form>
 </body>
 </html>
+
+// розібратися з sf: можна погуглити на ютубі,
+// розібратися з value
