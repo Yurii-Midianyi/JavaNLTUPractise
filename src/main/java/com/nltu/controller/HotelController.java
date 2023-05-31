@@ -2,35 +2,40 @@ package com.nltu.controller;
 
 import java.util.List;
 
-import com.nltu.dao.CountryDAO;
+import com.nltu.service.CountryService;
 import com.nltu.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.nltu.dao.HotelDAO;
 import com.nltu.entity.Hotel;
+
+import jakarta.transaction.Transactional;
 
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
 	
-	private HotelService hotelService;
-	private CountryDAO countryDAO;
+	private final HotelService hotelService;
+	private final CountryService countryService;
 	
 	@Autowired
-	public HotelController(HotelService hotelService, CountryDAO countryDAO) {
+	public HotelController(HotelService hotelService, CountryService countryService) {
 		this.hotelService = hotelService;
-		this.countryDAO = countryDAO;
+		this.countryService = countryService;
 	}
 
 	@GetMapping("/list")
+	@Transactional
 	public String listCustomers(Model model) {
-		//get hotels from the dao
 		List<Hotel> theHotels = hotelService.getHotels();
-		System.out.println(theHotels);
+		
+		//resolve issue with Lazy loading
+		theHotels.toString();
 		//add the hotels to the model
 		model.addAttribute("hotels", theHotels);
+
+		countryService.findHotelsByCountry();
 		return "hotels/hotelList";
 	}
 

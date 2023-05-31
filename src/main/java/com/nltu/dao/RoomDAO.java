@@ -11,4 +11,6 @@ public interface RoomDAO {
 	public Room getRoom(int roomId);
 
 	public void deleteRoom(int roomId);
+
+	List<Room> getRooms();
 }

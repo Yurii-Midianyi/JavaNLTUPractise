@@ -27,9 +27,7 @@ public class CountryDAOimpl implements CountryDAO{
         Query<Country> theQuery =
                 currentSession.createQuery("from Country", Country.class);
 
-        List<Country> countries = theQuery.getResultList();
-
-        return countries;
+        return theQuery.getResultList();
     }
 
     @Override

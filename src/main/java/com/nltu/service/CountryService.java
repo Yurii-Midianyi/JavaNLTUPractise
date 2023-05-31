@@ -15,4 +15,6 @@ public interface CountryService {
     void updateCountry(Country country);
 
     void deleteCountry(int id);
+
+    void findHotelsByCountry();
 }

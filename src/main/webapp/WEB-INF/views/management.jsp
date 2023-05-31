@@ -40,7 +40,120 @@
     </div>
 </nav>
 <p>Management page</p>
-<h1>CSS test</h1>
+<div>
+    <div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+            <c:forEach var="country" items="${countries}">
+                <tr>
+                    <td>${country.id}</td>
+                    <td>${country.countryName}</td>
+                    <td>
+                        <form method="GET" action="<c:url value="/countries/${country.id}" />">
+                            <input type="submit" value="Show">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="GET" action="<c:url value="/countries/${country.id}/edit" />">
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="<c:url value="/countries/${country.id}" />">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <div>
+        <form method="GET" action="<c:url value="/countries/new" />">
+            <input type="submit" value="Add new country">
+        </form>
+    </div>
+</div>
+<div>
+    <div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>country</th>
+            </tr>
+            <c:forEach var="hotel" items="${hotels}">
+                <tr>
+                    <td>${hotel.id}</td>
+                    <td>${hotel.hotelName}</td>
+                    <td>${hotel.country.countryName}</td>
+                    <td>
+                        <form method="GET" action="<c:url value="/hotel/${hotel.id}" />">
+                            <input type="submit" value="Show">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="GET" action="<c:url value="/hotel/${hotel.id}/edit" />">
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <div>
+        <form method="GET" action="<c:url value="/hotel/new" />">
+            <input type="submit" value="Add new hotel">
+        </form>
+    </div>
+</div>
+<div>
+    <div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>capacity</th>
+                <th>hotel</th>
+            </tr>
+            <c:forEach var="room" items="${rooms}">
+                <tr>
+                    <td>${room.id}</td>
+                    <td>${room.capacity}</td>
+                    <td>${room.hotel.hotelName}</td>
+                    <td>
+                        <form method="GET" action="">
+                            <input type="submit" value="Show">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="GET" action="<c:url value="/room/showFormForUpdate/${room.id}" />">
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="GET" action="<c:url value="/room/${room.id}/delete" />">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <div>
+        <form method="GET" action="">
+            <input type="submit" value="Add new hotel">
+        </form>
+    </div>
+</div>
 </body>
 </html>
  
