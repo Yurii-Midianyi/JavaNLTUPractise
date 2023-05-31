@@ -15,5 +15,5 @@ public interface CountryDAO {
 
     void deleteCountry(int id);
 
-    void findHotelsByCountry();
+    void findHotelsByCountry(int id);
 }

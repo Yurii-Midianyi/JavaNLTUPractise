@@ -33,10 +33,10 @@ public class HomeController {
 		return "home";
 	}
 
-	@PostMapping("/result")
+	@GetMapping("/result")
 	public String result(@ModelAttribute("country")Country country){
 		System.out.println(country.getId());
-
+		countryService.findHotelsByCountry(country.getId());
 		return "redirect:/home";
 	}
 

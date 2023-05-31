@@ -2,11 +2,13 @@ package com.nltu.dao;
 
 import com.nltu.entity.Country;
 
+import com.nltu.entity.Hotel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.hibernate.query.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -59,13 +61,27 @@ public class CountryDAOimpl implements CountryDAO{
     }
 
     @Override
-    public void findHotelsByCountry() {
+    public void findHotelsByCountry(int id) {
         Session session = sessionFactory.getCurrentSession();
 
-        List<Country> countries = session.createQuery("select c from Country c where countryName = 'Poland'", Country.class).getResultList();
+        List<Country> countries = session.createQuery("select c from Country c left join fetch c.hotels")
+                .getResultList();
 
-        for (Country country : countries) {
+        for (Country country: countries) {
             System.out.println("Country " + country.getCountryName() + " has " + country.getHotels());
         }
+
     }
-}
+    }
+
+//    @Override
+//    public void findHotelsByCountry() {
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        List<Country> countries = session.createQuery("select c from Country c where h = 'Poland'", Country.class).getResultList();
+//
+//        for (Country country : countries) {
+//            System.out.println("Country " + country.getCountryName() + " has " + country.getHotels());
+//        }
+//    }
+

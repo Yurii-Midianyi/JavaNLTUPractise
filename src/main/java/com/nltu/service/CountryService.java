@@ -16,5 +16,5 @@ public interface CountryService {
 
     void deleteCountry(int id);
 
-    void findHotelsByCountry();
+    void findHotelsByCountry(int id);
 }

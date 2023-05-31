@@ -10,8 +10,6 @@ import java.util.List;
 
 @Service
 public class CountryServiceImpl implements CountryService {
-    // here need autowired dao
-    // in dao need do methods for search hotels in different country
 
     private final CountryDAO countryDAO;
 
@@ -52,7 +50,9 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
-    public void findHotelsByCountry() {
-        countryDAO.findHotelsByCountry();
+    public void findHotelsByCountry(int id) {
+        countryDAO.findHotelsByCountry(id);
     }
+
+
 }
