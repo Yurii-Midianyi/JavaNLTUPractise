@@ -46,16 +46,16 @@
 <h1>CSS test</h1>
 
 <p>new</p>
-<form:form action="${pageContext.request.contextPath}/new" modelAttribute="countries" method="POST">
+<form:form action="/home/result" modelAttribute="countries" method="POST">
 	<label for="country">Choose country</label>
-	<select id="country">
+	<select id="country" name="id" value="${country.id}">
 		 <c:forEach var="country" items="${countries}">
-	       <option value="${country.id}" text="" >${country.countryName}</option>
+	       <option value="${country.id}" >${country.countryName}</option>
 	</c:forEach>
 	</select>
+	<input type="submit" value="Search">
 </form:form>
 </body>
 </html>
 
-// розібратися з sf: можна погуглити на ютубі,
-// розібратися з value
+
