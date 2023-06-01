@@ -2,6 +2,7 @@ package com.nltu.service;
 
 import com.nltu.dao.CountryDAO;
 import com.nltu.entity.Country;
+import com.nltu.entity.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +11,6 @@ import java.util.List;
 
 @Service
 public class CountryServiceImpl implements CountryService {
-    // here need autowired dao
-    // in dao need do methods for search hotels in different country
 
     private final CountryDAO countryDAO;
 
@@ -50,9 +49,12 @@ public class CountryServiceImpl implements CountryService {
         countryDAO.deleteCountry(id);
     }
 
+
     @Override
     @Transactional
-    public void findHotelsByCountry() {
-        countryDAO.findHotelsByCountry();
+    public List<Country> findHotelsByCountry(int id) {
+        return countryDAO.findHotelsByCountry(id);
     }
+
+
 }
