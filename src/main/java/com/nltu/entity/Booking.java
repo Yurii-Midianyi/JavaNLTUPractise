@@ -34,13 +34,25 @@ public class Booking {
 	@JoinColumn(name="user_id")
 	private User user;
 
+	@Column(name="enabled")
+	private Boolean enabled;
+	
 	public Booking() {}
 	
-	public Booking(LocalDate bookedSince, LocalDate bookedTo, Room room, User user) {		
+	public Booking(LocalDate bookedSince, LocalDate bookedTo, Room room, User user, boolean enabled) {		
 		this.bookedSince = bookedSince;
 		this.bookedTo = bookedTo;
 		this.room = room;
 		this.user = user;
+		this.enabled = enabled;
+	}
+
+	public Boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public int getId() {

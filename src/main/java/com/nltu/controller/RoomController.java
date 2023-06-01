@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.nltu.dao.HotelDAO;
-import com.nltu.dao.RoomDAO;
 import com.nltu.entity.Booking;
 import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
+import com.nltu.service.HotelService;
 import com.nltu.service.RoomService;
 
 @Controller
@@ -26,7 +24,7 @@ public class RoomController {
 	private RoomService roomService;
 	
 	@Autowired
-	private HotelDAO hotelDAO; //exchange for service later
+	private HotelService hotelService; 
 		
 	@GetMapping("/list/{hotelId}")
 	public String showList(@PathVariable int hotelId, Model model) {
@@ -48,7 +46,7 @@ public class RoomController {
 	public String showFormForAdd(@PathVariable int hotelId, Model model) {	
 		Room newRoom = new Room();
 	
-		Hotel hotel = hotelDAO.getHotel(hotelId);
+		Hotel hotel = hotelService.getHotel(hotelId);
 
 	    // Set the associated Hotel object in the new Room
 	    newRoom.setHotel(hotel);
@@ -77,8 +75,7 @@ public class RoomController {
 		
 		Room room = roomService.getRoom(roomId);
 		int hotelId = room.getHotel().getId(); //to redirect to the right page
-		roomService.deleteRoom(roomId);
-		
+		roomService.deleteRoom(roomId);		
 		return "redirect:/room/list/"+hotelId;
 	}
 	
@@ -87,7 +84,6 @@ public class RoomController {
 		Booking booking = new Booking();
 		model.addAttribute("booking", booking);
 		model.addAttribute("roomId", roomId);
-		//return "booking-form";//uncomment when ready
 		return "booking-form";
 	}
 }
