@@ -12,4 +12,6 @@ public interface BookingDAO {
 	List<Booking> getBookingsByUserId(int userId);
 
 	public List<Booking> getAvailableBookings();
+
+	public void deleteBooking(int bookingId);
 }

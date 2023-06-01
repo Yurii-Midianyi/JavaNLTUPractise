@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.nltu.entity.Booking;
 
-
 @Repository
 public class BookingDAOimpl implements BookingDAO{
 
@@ -64,5 +63,15 @@ public class BookingDAOimpl implements BookingDAO{
 								
 		//return the results
 		return bookings;
+	}
+
+	@Override
+	public void deleteBooking(int bookingId) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<?> theQuery = currentSession.createQuery("update Booking set enabled = false where id = :bookingId");
+	    theQuery.setParameter("bookingId", bookingId);
+	    theQuery.executeUpdate();	
 	}
 }
