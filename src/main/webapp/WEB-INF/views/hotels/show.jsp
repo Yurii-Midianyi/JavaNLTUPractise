@@ -9,7 +9,7 @@
 <p>${hotel.id}</p>
 
 <a href="<c:url value="/hotel/${hotel.id}/edit" />">Edit</a>
-
+<a href="<c:url value="/room/list/${hotel.id}" />">Rooms</a>
 <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete"/>

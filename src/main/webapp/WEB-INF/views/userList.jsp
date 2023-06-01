@@ -21,6 +21,11 @@
 				<td>${tempUser.password}</td>
 				<td>${tempUser.enabled}</td>
 				<td>${tempUser.role}</td>
+				<td>
+					<form method="GET" action="<c:url value="/booking/list/${tempUser.id}" />">
+						<input type="submit" value="Show bookings">
+					</form>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
