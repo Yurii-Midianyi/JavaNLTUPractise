@@ -34,7 +34,7 @@ public class HotelController {
 		theHotels.toString();
 		//add the hotels to the model
 		model.addAttribute("hotels", theHotels);
-		countryService.findHotelsByCountry();
+
 		return "hotels/hotelList";
 	}
 
