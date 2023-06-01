@@ -22,4 +22,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUsers();
 	}
 
+	@Override
+	@Transactional
+	public User getUser(int userId) {
+		return userDAO.getUser(userId);
+	}
+
 }

@@ -7,32 +7,24 @@
 </head>
 <body>
 	
-	<form:form action="${pageContext.request.contextPath}/booking/saveBooking" modelAttribute="booking" method="POST">
+	<form action="${pageContext.request.contextPath}/booking/saveBooking" method="POST">
 		<table>
 			<tbody>
+				 
 				<tr>
-					<td><label>Booked since (enter in format 'yyyy-mm-dd'):</label></td>
-					<td><form:input path="bookedSince"/></td>					
+					<td><label>bookedSince:</label></td>
+					<td><input type="date" name="bookedSince"></td>					
 				</tr>
 				
 				<tr>
-					<td><label>Booked to (enter in format 'yyyy-mm-dd'):</label></td>
-					<td><form:input path="bookedTo"/></td>					
+					<td><label>bookedTo:</label></td>
+					<td><input type="date" name="bookedTo"></td>					
 				</tr>
-						
-				<tr>				
-					<td><form:input type="hidden" path="room"/></td>					
+					
+				<tr>
+					<td><input type="hidden" name="roomId"  value="${roomId}"></td>					
 				</tr>
-				
-				<tr>				
-					<td><form:input type="hidden" path="user"/></td>					
-				</tr>	
-						
-				<tr>				
-					<td><form:input type="hidden" path="id"/></td>					
-				</tr>
-			
-				
+									
 				<tr>
 					<td><label></label></td>
 					<td><input type="submit" value="Save"/></td>					
@@ -40,7 +32,7 @@
 			
 			</tbody>
 		</table>
-	</form:form>
+	</form>
 	
 	<a href="${pageContext.request.contextPath}/booking/list">Back to List</a>
 	
