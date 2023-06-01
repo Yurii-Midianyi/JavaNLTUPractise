@@ -10,4 +10,8 @@ public interface BookingService {
 	public void saveBooking(Booking booking);
 
 	List<Booking> getBookingsByUserId(int userId);
+
+	public List<Booking> getAvailableBookings();
+
+	public void deleteBooking(int bookingId);
 }

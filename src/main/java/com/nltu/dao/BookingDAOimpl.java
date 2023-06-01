@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.nltu.entity.Booking;
 
-
 @Repository
 public class BookingDAOimpl implements BookingDAO{
 
@@ -48,5 +47,31 @@ public class BookingDAOimpl implements BookingDAO{
 				currentSession.createQuery("from Booking where user.id = " + userId, Booking.class);
 
 		return theQuery.getResultList();
+	}
+
+	@Override
+	public List<Booking> getAvailableBookings() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//create a query
+		Query<Booking> theQuery = 
+				currentSession.createQuery("from Booking WHERE enabled = 1", Booking.class);
+								
+						
+		//execute query and get result list
+		List<Booking> bookings = theQuery.getResultList();
+								
+		//return the results
+		return bookings;
+	}
+
+	@Override
+	public void deleteBooking(int bookingId) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<?> theQuery = currentSession.createQuery("update Booking set enabled = false where id = :bookingId");
+	    theQuery.setParameter("bookingId", bookingId);
+	    theQuery.executeUpdate();	
 	}
 }
