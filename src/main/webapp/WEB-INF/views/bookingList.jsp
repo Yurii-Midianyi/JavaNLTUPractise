@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<input type="button" value="Add Booking" 
+<!--<input type="button" value="Add Booking" 
     onclick="window.location.href='${pageContext.request.contextPath}/booking/showFormForAdd'; return false;"
-    class="" /><!-- attribute class needed for style purposes -->
+    class="" />--><!-- attribute class needed for style purposes -->
 <div>
 	<table>
 		<tr>
