@@ -36,7 +36,12 @@ public class BookingController {
 	@GetMapping("/list")
 	@Transactional
 	public String getAllBookings(Model model) {	
-		List<Booking> bookings = bookingService.getAllBookings();	
+		
+		//get all Bookings
+		//List<Booking> bookings = bookingService.getAllBookings();	
+		
+		//get all available Bookings
+		List<Booking> bookings = bookingService.getAvailableBookings();	
 		bookings.toString(); //resolve issue with Lazy loading
 		model.addAttribute("bookings", bookings);
 		return "bookingList";
@@ -45,7 +50,7 @@ public class BookingController {
 	
 	@PostMapping("/saveBooking")
 	//public String saveRoom(@ModelAttribute("booking") Booking booking) {
-	public String saveRoom(@RequestParam("bookedSince") String bookedSince,
+	public String Booking(@RequestParam("bookedSince") String bookedSince,
 						   @RequestParam("bookedTo") String bookedTo,
 						   @RequestParam("roomId") int roomId) {
 		

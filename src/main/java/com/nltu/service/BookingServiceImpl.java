@@ -33,4 +33,9 @@ public class BookingServiceImpl implements BookingService {
 	public List<Booking> getBookingsByUserId(int userId) {
 		return bookingDAO.getBookingsByUserId(userId);
 	}
+
+	@Override
+	public List<Booking> getAvailableBookings() {
+		return bookingDAO.getAvailableBookings();
+	}
 }

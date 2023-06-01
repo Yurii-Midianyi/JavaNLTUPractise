@@ -10,4 +10,6 @@ public interface BookingDAO {
 	public void saveBooking(Booking booking);
 
 	List<Booking> getBookingsByUserId(int userId);
+
+	public List<Booking> getAvailableBookings();
 }

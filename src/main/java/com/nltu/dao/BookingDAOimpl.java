@@ -49,4 +49,20 @@ public class BookingDAOimpl implements BookingDAO{
 
 		return theQuery.getResultList();
 	}
+
+	@Override
+	public List<Booking> getAvailableBookings() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//create a query
+		Query<Booking> theQuery = 
+				currentSession.createQuery("from Booking WHERE enabled = 1", Booking.class);
+								
+						
+		//execute query and get result list
+		List<Booking> bookings = theQuery.getResultList();
+								
+		//return the results
+		return bookings;
+	}
 }
