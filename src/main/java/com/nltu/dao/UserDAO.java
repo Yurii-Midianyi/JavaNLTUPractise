@@ -6,4 +6,6 @@ import com.nltu.entity.User;
 
 public interface UserDAO {
 	public List<User> getUsers();
+
+	public User getUser(int userId);
 }

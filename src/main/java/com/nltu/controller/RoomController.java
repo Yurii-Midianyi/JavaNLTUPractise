@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nltu.dao.HotelDAO;
 import com.nltu.dao.RoomDAO;
+import com.nltu.entity.Booking;
 import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
 import com.nltu.service.RoomService;
@@ -79,5 +80,14 @@ public class RoomController {
 		roomService.deleteRoom(roomId);
 		
 		return "redirect:/room/list/"+hotelId;
+	}
+	
+	@GetMapping("/book/{roomId}")
+	public String bookRoom(@PathVariable int roomId, Model model) {				
+		Booking booking = new Booking();
+		model.addAttribute("booking", booking);
+		model.addAttribute("roomId", roomId);
+		//return "booking-form";//uncomment when ready
+		return "booking-form";
 	}
 }

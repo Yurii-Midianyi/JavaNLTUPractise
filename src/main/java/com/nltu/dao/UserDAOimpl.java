@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.nltu.entity.User;
 
 @Repository
@@ -31,5 +30,12 @@ public class UserDAOimpl implements UserDAO{
 						
 		//return the results
 		return users;
+	}
+
+	@Override
+	public User getUser(int userId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		User user = currentSession.get(User.class, userId);
+		return user;
 	}
 }

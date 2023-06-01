@@ -36,6 +36,13 @@ public class Booking {
 
 	public Booking() {}
 	
+	public Booking(LocalDate bookedSince, LocalDate bookedTo, Room room, User user) {		
+		this.bookedSince = bookedSince;
+		this.bookedTo = bookedTo;
+		this.room = room;
+		this.user = user;
+	}
+
 	public int getId() {
 		return id;
 	}
