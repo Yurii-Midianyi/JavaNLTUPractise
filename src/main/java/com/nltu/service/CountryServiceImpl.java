@@ -49,10 +49,9 @@ public class CountryServiceImpl implements CountryService {
         countryDAO.deleteCountry(id);
     }
 
-
     @Override
     @Transactional
-    public List<Country> findHotelsByCountry(int id) {
+    public List<Hotel> findHotelsByCountry(int id) {
         return countryDAO.findHotelsByCountry(id);
     }
 

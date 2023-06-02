@@ -3,6 +3,8 @@ package com.nltu.dao;
 import com.nltu.entity.Country;
 
 import com.nltu.entity.Hotel;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,17 +63,16 @@ public class CountryDAOimpl implements CountryDAO {
     }
 
     @Override
-    public List<Country> findHotelsByCountry(int id) {
+    public List<Hotel> findHotelsByCountry(int id) {
         Session session = sessionFactory.getCurrentSession();
 
-        List<Country> countries = session.createQuery("select c from Country c left join fetch c.hotels where c.id = :countryId ", Country.class )
-            .setParameter("countryId", id)
-            .getResultList();
+        List<Hotel> hotels = session.createQuery("select h from Country c join c.hotels h where c.id = :countryId", Hotel.class)
+                .setParameter("countryId", id)
+                .getResultList();
 
-
-        for (Country country : countries) {
-            System.out.println("Country " + country.getCountryName() + " has " + country.getHotels());
-        }
-        return countries;
+        return hotels;
     }
+
 }
+
+

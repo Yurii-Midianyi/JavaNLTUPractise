@@ -15,7 +15,7 @@
 <body>
 <form:form action="/home/result" modelAttribute="countries" method="GET">
     <c:forEach var="country" items="${countries}">
-        <p>${country.hotels}</p>
+        <p>${country.hotelName}</p>
     </c:forEach>
 </form:form>
 </body>
