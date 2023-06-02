@@ -15,6 +15,11 @@
 					<td><form:input path="capacity"/></td>					
 				</tr>
 				
+				<tr>
+					<td><label>Room number:</label></td>
+					<td><form:input path="roomNumber"/></td>					
+				</tr>
+				
 				<tr>				
 					<td><form:input type="hidden" path="hotel.id"/></td>					
 				</tr> 

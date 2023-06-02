@@ -15,6 +15,9 @@ public class Room {
 	
 	@Column(name="capacity")
 	private int capacity;
+	
+	@Column(name="room_number")
+	private int roomNumber;
 
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.REFRESH})
@@ -56,6 +59,14 @@ public class Room {
 
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
+	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 
 	@Override
