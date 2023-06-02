@@ -35,7 +35,7 @@ public class ManagementController {
 
         model.addAttribute("hotels", hotelService.getHotels());
 
-        model.addAttribute("rooms", roomService.getRooms());
+        model.addAttribute("rooms", roomService.getAllRooms());
         return "management";
     }
 

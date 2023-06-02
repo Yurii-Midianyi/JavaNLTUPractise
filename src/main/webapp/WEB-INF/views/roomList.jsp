@@ -21,6 +21,7 @@
 			<tr>
 				<th>id</th>
 				<th>capacity</th>
+				<th>room number</th>
 				<th>hotel id</th>
 				<th>action</th>
 			</tr>
@@ -41,6 +42,7 @@
     <tr>
         <td>${tempRoom.id}</td>
         <td>${tempRoom.capacity}</td>
+        <td>${tempRoom.roomNumber}</td>
         <td>${tempRoom.hotel.id}</td> <!-- Access hotel's id -->
         <td> 
         	<a href="${bookingLink}">Book</a>

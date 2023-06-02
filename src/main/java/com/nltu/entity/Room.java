@@ -15,7 +15,13 @@ public class Room {
 	
 	@Column(name="capacity")
 	private int capacity;
+	
+	@Column(name="room_number")
+	private int roomNumber;
 
+	@Column(name="enabled")
+	private Boolean enabled;
+	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="hotel_id")
@@ -56,6 +62,22 @@ public class Room {
 
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
+	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override

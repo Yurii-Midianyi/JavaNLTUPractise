@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form:form action="/hotel/list" method="POST" modelAttribute="hotel">
+<form:form action="${pageContext.request.contextPath}/hotel/list" method="POST" modelAttribute="hotel">
     <label for="name">Enter name: </label>
     <form:input path="hotelName" id="name"/>
     <br/>

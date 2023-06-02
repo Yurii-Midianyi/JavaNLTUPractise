@@ -1,15 +1,11 @@
 package com.nltu.dao;
 
 import java.util.List;
-
-import com.nltu.entity.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.nltu.entity.Room;
 
 @Repository
@@ -19,7 +15,7 @@ public class RoomDAOimpl implements RoomDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Room> getRooms(int hotelId) {
+	public List<Room> getRoomsOfHotel(int hotelId) {
 		
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -56,18 +52,36 @@ public class RoomDAOimpl implements RoomDAO {
 	public void deleteRoom(int roomId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Room room = currentSession.get(Room.class, roomId);
-		
-		currentSession.remove(room);
+//		Room room = currentSession.get(Room.class, roomId);
+//		currentSession.remove(room);
+		Query<?> theQuery = currentSession.createQuery("update Room set enabled = false where id = :roomId");
+	    theQuery.setParameter("roomId", roomId);
+	    theQuery.executeUpdate();	
 	}
 
 	@Override
-	public List<Room> getRooms() {
+	public List<Room> getAllRooms() {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<Room> theQuery =
 				currentSession.createQuery("from Room", Room.class);
 
 		return theQuery.getResultList();
+	}
+
+	@Override
+	public List<Room> getAvailableRooms(int hotelId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//create a query
+		Query<Room> theQuery = 
+				currentSession.createQuery("from Room WHERE enabled = 1 AND hotel.id=:hotelId", Room.class);
+		theQuery.setParameter("hotelId", hotelId);						
+						
+		//execute query and get result list
+		List<Room> rooms = theQuery.getResultList();
+								
+		//return the results
+		return rooms;
 	}
 }

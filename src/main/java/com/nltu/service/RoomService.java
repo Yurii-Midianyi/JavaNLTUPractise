@@ -6,7 +6,11 @@ import com.nltu.entity.Room;
 
 public interface RoomService {
 	
-	public List<Room> getRooms(int hotelId);
+	public List<Room> getRoomsOfHotel(int hotelId);
+	
+	public List<Room> getAllRooms();
+
+	public List<Room> getAvailableRooms(int hotelId);
 	
 	public void saveRoom(Room room);
 
@@ -14,5 +18,5 @@ public interface RoomService {
 
 	public void deleteRoom(int roomId);
 
-	List<Room> getRooms();
+	
 }
