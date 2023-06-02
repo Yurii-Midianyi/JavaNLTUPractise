@@ -2,6 +2,7 @@ package com.nltu.controller;
 
 import java.util.List;
 
+import com.nltu.entity.Country;
 import com.nltu.service.CountryService;
 import com.nltu.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,10 @@ public class HotelController {
 	}
 
 	@GetMapping("/new")
-	public String newHotel(Model model){
+	public String newHotel(Model model, @ModelAttribute("country") Country country){
 		model.addAttribute("hotel", new Hotel());
+		model.addAttribute("country", new Country());
+		model.addAttribute("countries", countryService.getCountries());
 		return "/hotels/new";
 	}
 	@PostMapping("/list")

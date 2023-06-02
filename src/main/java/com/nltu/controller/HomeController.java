@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
 	private final CountryService countryService;
-	private final CountryDAOimpl countryDAOimpl;
 
 	@Autowired
-	public HomeController(CountryService countryService, CountryDAOimpl countryDAOimpl) {
+	public HomeController(CountryService countryService) {
 		this.countryService = countryService;
-		this.countryDAOimpl = countryDAOimpl;
 	}
 
 

@@ -75,26 +75,5 @@
 	</div>
 </section>
 
-<div>
-	<a href="<c:url value="/hotel/new" />">add new hotel</a>
-</div>
-	
-<div>
-	<table>
-		<tr>
-			<th>id</th>
-			<th>name</th>
-			<th>country</th>
-		</tr>
-		<c:forEach var="tempHotel" items="${hotels}">
-			<tr>
-				<td>${tempHotel.id}</td>
-				<td>${tempHotel.hotelName}</td>
-				<td>${tempHotel.country}</td>
-			</tr>
-		</c:forEach>
-	</table>
-</div>
 </body>
 </html>
-<%--<a href="/hotels/${hotel.getID()}"> ${tempHotel.id} </a>--%>

@@ -1,15 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <title>New hotel</title>
 </head>
 <body>
-<form method="POST" action="<c:url value="/hotel/list" />">
+
+<form:form action="/hotel/list" method="POST" modelAttribute="hotel">
     <label for="name">Enter name: </label>
-    <input type="text" name="hotelName" id="name"/>
+    <form:input path="hotelName" id="name"/>
     <br/>
-    <input type="submit" value="Create!"/>
-</form>
+    <label for="country">Country</label>
+    <form:select path="country.id" id="country">
+        <form:options items="${countries}" itemValue="id" itemLabel="countryName" />
+    </form:select><br>
+    <input type="submit" value="Create">
+</form:form>
+
 </body>
 </html>
