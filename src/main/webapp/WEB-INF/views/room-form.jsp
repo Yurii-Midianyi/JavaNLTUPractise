@@ -20,6 +20,16 @@
 					<td><form:input path="roomNumber"/></td>					
 				</tr>
 				
+				<tr>
+					<td><label>enabled:</label></td>
+					<td>
+						<form:select path="enabled"> 
+							<form:option value="true" label="true"/>  
+        					<form:option value="false" label="false"/>  
+						</form:select> 
+					</td>					
+				</tr>
+				
 				<tr>				
 					<td><form:input type="hidden" path="hotel.id"/></td>					
 				</tr> 

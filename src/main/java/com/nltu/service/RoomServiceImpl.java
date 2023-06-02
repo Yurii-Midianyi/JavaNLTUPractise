@@ -36,8 +36,8 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	@Transactional
-	public List<Room> getRooms(int hotelId) {
-		return roomDAO.getRooms(hotelId);
+	public List<Room> getRoomsOfHotel(int hotelId) {
+		return roomDAO.getRoomsOfHotel(hotelId);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	@Transactional
 	public List<Room> getAllRooms() { 
-		return roomDAO.getRooms();
+		return roomDAO.getAllRooms();
 	}
 
 	@Override

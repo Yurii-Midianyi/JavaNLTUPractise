@@ -72,6 +72,14 @@ public class Room {
 		this.roomNumber = roomNumber;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "Room [id=" + id + ", capacity=" + capacity + "]";
