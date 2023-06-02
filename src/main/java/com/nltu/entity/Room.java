@@ -19,6 +19,9 @@ public class Room {
 	@Column(name="room_number")
 	private int roomNumber;
 
+	@Column(name="enabled")
+	private Boolean enabled;
+	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="hotel_id")
