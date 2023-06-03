@@ -84,4 +84,12 @@ public class Hotel {
 		rooms.add(tempRoom);
 		tempRoom.setHotel(this);
 	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 }
