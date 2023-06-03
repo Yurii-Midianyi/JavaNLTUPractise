@@ -25,6 +25,9 @@ public class Hotel {
 	
 	@Column(name="hotel_name")
 	private String hotelName;
+
+	@Column(name="enabled")
+	private Boolean enabled;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")

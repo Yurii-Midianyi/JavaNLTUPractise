@@ -59,7 +59,11 @@ public class CountryDAOimpl implements CountryDAO {
     public void deleteCountry(int id) {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        currentSession.remove(currentSession.get(Country.class, id));
+//        currentSession.remove(currentSession.get(Country.class, id));
+
+        Query<?> theQuery = currentSession.createQuery("update Country set enabled = false where id = :id");
+        theQuery.setParameter("id", id);
+        theQuery.executeUpdate();
     }
 
     @Override
@@ -73,6 +77,16 @@ public class CountryDAOimpl implements CountryDAO {
         return hotels;
     }
 
+    @Override
+    public List<Hotel> findAvailableHotelsByCountry(int id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        List<Hotel> hotels = session.createQuery("select h from Country c join c.hotels h where c.id = :countryId and c.enabled = true", Hotel.class)
+                .setParameter("countryId", id)
+                .getResultList();
+
+        return hotels;
+    }
 }
 
 

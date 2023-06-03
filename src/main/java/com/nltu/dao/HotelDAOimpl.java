@@ -79,7 +79,10 @@ public class HotelDAOimpl implements HotelDAO {
     @Transactional
 	public void delete(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		session.remove(session.get(Hotel.class, id));
+//		session.remove(session.get(Hotel.class, id));
 
+		Query<?> theQuery = session.createQuery("update Hotel set enabled = false where id = :id");
+		theQuery.setParameter("id", id);
+		theQuery.executeUpdate();
 	}
 }

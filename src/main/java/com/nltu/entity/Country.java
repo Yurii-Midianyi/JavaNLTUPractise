@@ -20,6 +20,9 @@ public class Country {
 	
 	@Column(name="country_name")
 	private String countryName;
+
+	@Column(name="enabled")
+	private Boolean enabled;
 	
 	@OneToMany(mappedBy = "country")
     private List<Hotel> hotels;
@@ -48,6 +51,14 @@ public class Country {
 
 	public void setHotels(List<Hotel> hotels) {
 		this.hotels = hotels;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override
