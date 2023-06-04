@@ -40,7 +40,7 @@ public class User {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Booking> bookings;
 	
-	User(){}
+	public User(){}
 
 	public int getId() {
 		return id;
