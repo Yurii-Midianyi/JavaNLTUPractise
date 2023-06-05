@@ -22,6 +22,9 @@ public class Role {
 	@Column(name="role_name")
 	private String roleName;
 
+	@Column(name="enabled")
+	private Boolean enabled;
+
 	@OneToMany(mappedBy = "role", cascade = 
 					{CascadeType.PERSIST, CascadeType.MERGE,
 					CascadeType.DETACH, CascadeType.REFRESH})
@@ -43,6 +46,14 @@ public class Role {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override

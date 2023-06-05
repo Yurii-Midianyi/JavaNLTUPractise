@@ -2,6 +2,7 @@ package com.nltu.dao;
 
 import java.util.List;
 
+import com.nltu.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -37,5 +38,15 @@ public class UserDAOimpl implements UserDAO{
 		Session currentSession = sessionFactory.getCurrentSession();
 		User user = currentSession.get(User.class, userId);
 		return user;
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<?> theQuery =
+				currentSession.createQuery("update User set enabled = false where id = :id");
+		theQuery.setParameter("id", id);
+		theQuery.executeUpdate();
 	}
 }

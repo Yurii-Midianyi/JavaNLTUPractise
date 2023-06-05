@@ -25,6 +25,9 @@ public class Hotel {
 	
 	@Column(name="hotel_name")
 	private String hotelName;
+
+	@Column(name="enabled")
+	private Boolean enabled;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
@@ -80,5 +83,13 @@ public class Hotel {
 		}
 		rooms.add(tempRoom);
 		tempRoom.setHotel(this);
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 }

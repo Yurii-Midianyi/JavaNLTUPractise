@@ -45,11 +45,13 @@
         <table>
             <tr>
                 <th>id</th>
+                <th>enabled</th>
                 <th>name</th>
             </tr>
             <c:forEach var="country" items="${countries}">
                 <tr>
                     <td>${country.id}</td>
+                    <td>${country.enabled}</td>
                     <td>${country.countryName}</td>
                     <td>
                         <form method="GET" action="<c:url value="/countries/${country.id}" />">
@@ -83,12 +85,14 @@
             <tr>
                 <th>id</th>
                 <th>name</th>
+                <th>enabled</th>
                 <th>country</th>
             </tr>
             <c:forEach var="hotel" items="${hotels}">
                 <tr>
                     <td>${hotel.id}</td>
                     <td>${hotel.hotelName}</td>
+                    <td>${hotel.enabled}</td>
                     <td>${hotel.country.countryName}</td>
                     <td>
                         <form method="GET" action="<c:url value="/hotel/${hotel.id}" />">

@@ -46,7 +46,7 @@
 <h1>CSS test</h1>
 
 <p>new</p>
-<form:form action="/home/result" modelAttribute="countries" method="GET">
+<form:form action="${pageContext.request.contextPath}/home/result" modelAttribute="countries" method="GET">
 	<label for="country">Choose country</label>
 	<select id="country" name="id" value="${country.id}">
 		 <c:forEach var="country" items="${countries}">
