@@ -63,6 +63,11 @@ public class RoomController {
 	@PostMapping("/saveRoom")
 	public String saveRoom(@Valid @ModelAttribute("room") Room theRoom,
 						   BindingResult bindingResult) {
+		
+		if(roomService.checkRoomExists(theRoom.getRoomNumber())) {
+			bindingResult.rejectValue("roomNumber", "error.roomNumber", "This room number already exists");
+		}
+		
 		if(bindingResult.hasErrors()) {
 			return "room-form";
 		}

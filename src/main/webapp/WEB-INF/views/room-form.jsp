@@ -20,7 +20,10 @@
 				
 				<tr>
 					<td><label>Room number:</label></td>
-					<td><form:input path="roomNumber"/></td>					
+					<td>
+						<form:input path="roomNumber"/>
+						<form:errors path="roomNumber" cssClass="form-error"/>
+					</td>					
 				</tr>
 				
 				<tr>

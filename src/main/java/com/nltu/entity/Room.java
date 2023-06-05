@@ -21,7 +21,7 @@ public class Room {
 	@Column(name="capacity")
 	private int capacity;
 	
-	@Column(name="room_number")
+	@Column(name="room_number", unique = true)
 	private int roomNumber;
 
 	@Column(name="enabled")
