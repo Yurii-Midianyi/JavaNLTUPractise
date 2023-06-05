@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css?version=51" />" rel="stylesheet">
     <title>Save room</title>
 </head>
 <body>
@@ -12,7 +12,10 @@
 			<tbody>
 				<tr>
 					<td><label>Capacity:</label></td>
-					<td><form:input path="capacity"/></td>					
+					<td>
+						<form:input path="capacity"/>
+						<form:errors path="capacity" cssClass="form-error"/>
+					</td>					
 				</tr>
 				
 				<tr>

@@ -2,9 +2,12 @@ package com.nltu.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,10 +61,15 @@ public class RoomController {
 	}
 	
 	@PostMapping("/saveRoom")
-	public String saveRoom(@ModelAttribute("room") Room theRoom) {
-		
-		roomService.saveRoom(theRoom);
-		return "redirect:/room/list/"+theRoom.getHotel().getId();
+	public String saveRoom(@Valid @ModelAttribute("room") Room theRoom,
+						   BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "room-form";
+		}
+		else {
+			roomService.saveRoom(theRoom);
+			return "redirect:/room/list/"+theRoom.getHotel().getId();
+		}
 	}
 	
 	@GetMapping("/showFormForUpdate/{roomId}")
