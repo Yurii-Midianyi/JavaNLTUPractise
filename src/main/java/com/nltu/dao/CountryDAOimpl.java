@@ -81,7 +81,7 @@ public class CountryDAOimpl implements CountryDAO {
     public List<Hotel> findAvailableHotelsByCountry(int id) {
         Session session = sessionFactory.getCurrentSession();
 
-        List<Hotel> hotels = session.createQuery("select h from Country c join c.hotels h where c.id = :countryId and c.enabled = true", Hotel.class)
+        List<Hotel> hotels = session.createQuery("select h from Country c join c.hotels h where c.id = :countryId and c.enabled = true ", Hotel.class)
                 .setParameter("countryId", id)
                 .getResultList();
 
