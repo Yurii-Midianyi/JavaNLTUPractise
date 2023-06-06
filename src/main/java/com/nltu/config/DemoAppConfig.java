@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -50,5 +51,10 @@ public class DemoAppConfig implements WebMvcConfigurer{
 	    messageSource.setDefaultEncoding("UTF-8");
 	    return messageSource;
 	}
+	
+	@Override
+    public void addFormatters(FormatterRegistry registry) { //to fix issue with dates
+        registry.addConverter(new StringToLocalDateConverter());
+    }
 
 }

@@ -18,6 +18,7 @@ import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
 import com.nltu.service.HotelService;
 import com.nltu.service.RoomService;
+import com.nltu.service.UserService;
 
 @Controller
 @RequestMapping("/room")
@@ -28,6 +29,9 @@ public class RoomController {
 	
 	@Autowired
 	private HotelService hotelService; 
+	
+	@Autowired
+	private UserService userService; 
 		
 	@GetMapping("/list/{hotelId}")
 	public String showList(@PathVariable int hotelId, Model model) {
@@ -92,12 +96,14 @@ public class RoomController {
 		roomService.deleteRoom(roomId);		
 		return "redirect:/room/list/"+hotelId;
 	}
-	
+
 	@GetMapping("/book/{roomId}")
 	public String bookRoom(@PathVariable int roomId, Model model) {				
 		Booking booking = new Booking();
-		model.addAttribute("booking", booking);
-		model.addAttribute("roomId", roomId);
+		booking.setRoom(roomService.getRoom(roomId));
+		booking.setUser(userService.getUser(1)); //hardcoded user
+		model.addAttribute("booking", booking);	
 		return "booking-form";
 	}
+		
 }
