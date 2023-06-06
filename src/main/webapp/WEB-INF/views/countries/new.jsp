@@ -12,7 +12,7 @@
 <%--    <br/>--%>
 <%--    <input type="submit" value="Create!"/>--%>
 <%--</form>--%>
-<form:form action="/countries" modelAttribute="country" method="POST">
+<form:form action="${pageContext.request.contextPath}/countries" modelAttribute="country" method="POST">
     <label for="name">Enter name: </label>
     <form:input path="countryName" id="name"/>
     <form:select path="enabled">

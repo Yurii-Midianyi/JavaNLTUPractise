@@ -61,6 +61,10 @@ public class BookingServiceImpl implements BookingService {
 	@Transactional
 	public Boolean checkIfBookingIsAvailable(int roomId, LocalDate bookedSince, LocalDate bookedTo) {
 		
+		if(bookedSince == null || bookedTo == null) {
+			return false;
+		}
+		
 		if(bookedSince.isAfter(bookedTo)) {
 			return false;
 		}

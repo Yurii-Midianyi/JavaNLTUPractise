@@ -53,6 +53,7 @@ public class BookingController {
 				booking.getBookedSince(), 
 				booking.getBookedTo())) {
 			bindingResult.rejectValue("bookedSince", "error.bookedSince", "This date in unavailable");
+			System.out.println(bindingResult);
 		}
 		
 		if(bindingResult.hasErrors()) {
