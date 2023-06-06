@@ -1,7 +1,11 @@
 package com.nltu.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,9 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private BookingDAO bookingDAO;
 	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	@Override
 	@Transactional
 	public List<Booking> getAllBookings() {		
@@ -25,7 +32,12 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	@Transactional
 	public void saveBooking(Booking booking) {
-		bookingDAO.saveBooking(booking);
+		if(checkIfBookingIsAvailable(booking.getRoom().getId(), 
+				  					 booking.getBookedSince(), 
+				  					 booking.getBookedTo())) 
+		{
+			bookingDAO.saveBooking(booking);	
+		}	
 	}
 
 	@Override
@@ -43,5 +55,21 @@ public class BookingServiceImpl implements BookingService {
 	@Transactional
 	public void deleteBooking(int bookingId) {	
 		bookingDAO.deleteBooking(bookingId);
+	}
+
+	@Override
+	@Transactional
+	public Boolean checkIfBookingIsAvailable(int roomId, LocalDate bookedSince, LocalDate bookedTo) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<Booking> theQuery =
+				currentSession.createQuery("from Booking where room.id =:roomId AND bookedSince BETWEEN "
+				+ ":bookedSince AND :bookedTo OR bookedTo BETWEEN :bookedSince AND :bookedTo" , Booking.class);
+		theQuery.setParameter("bookedSince", bookedSince);
+		theQuery.setParameter("bookedTo", bookedTo);
+		theQuery.setParameter("roomId", roomId);
+			
+		List<Booking> bookings = theQuery.getResultList();
+		return (bookings.isEmpty()) ? true : false;
 	}
 }
