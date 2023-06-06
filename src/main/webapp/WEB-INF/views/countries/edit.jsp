@@ -14,7 +14,7 @@
 <%--    <br/>--%>
 <%--    <input type="submit" value="Update"/>--%>
 <%--</form>--%>
-    <form:form action="/countries/${country.id}" modelAttribute="country" method="POST">
+    <form:form action="${pageContext.request.contextPath}/countries/${country.id}" modelAttribute="country" method="POST">
             <input type="hidden" name="_method" value="PATCH"/>
             <label for="name">Enter name: </label>
             <form:input path="countryName" id="name"/>
