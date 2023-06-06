@@ -19,4 +19,6 @@ public interface CountryService {
 
     List<Hotel> findHotelsByCountry(int id);
 
+    List<Hotel> findAvailableHotelsByCountry(int id);
+
 }

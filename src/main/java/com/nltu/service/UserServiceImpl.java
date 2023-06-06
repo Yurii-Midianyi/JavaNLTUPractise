@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUser(userId);
 	}
 
+	@Override
+	@Transactional
+	public void deleteUser(int id) {
+		userDAO.deleteUser(id);
+	}
 }

@@ -55,5 +55,9 @@ public class CountryServiceImpl implements CountryService {
         return countryDAO.findHotelsByCountry(id);
     }
 
-
+    @Override
+    @Transactional
+    public List<Hotel> findAvailableHotelsByCountry(int id) {
+        return countryDAO.findAvailableHotelsByCountry(id);
+    }
 }
