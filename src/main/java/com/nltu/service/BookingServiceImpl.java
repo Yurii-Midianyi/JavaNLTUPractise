@@ -60,6 +60,11 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	@Transactional
 	public Boolean checkIfBookingIsAvailable(int roomId, LocalDate bookedSince, LocalDate bookedTo) {
+		
+		if(bookedSince.isAfter(bookedTo)) {
+			return false;
+		}
+		
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<Booking> theQuery =

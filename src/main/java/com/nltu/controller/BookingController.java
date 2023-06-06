@@ -49,6 +49,12 @@ public class BookingController {
 	public String booking(@Valid @ModelAttribute("booking") Booking booking,
 			   BindingResult bindingResult) {
 		
+		if(!bookingService.checkIfBookingIsAvailable(booking.getRoom().getId(), 
+				booking.getBookedSince(), 
+				booking.getBookedTo())) {
+			bindingResult.rejectValue("bookedSince", "error.bookedSince", "This date in unavailable");
+		}
+		
 		if(bindingResult.hasErrors()) {
 			return "booking-form";
 		}
