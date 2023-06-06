@@ -2,6 +2,8 @@ package com.nltu.entity;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.FutureOrPresent;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,9 +22,11 @@ public class Booking {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@FutureOrPresent(message="not valid date")
 	@Column(name="booked_since")
 	private LocalDate bookedSince;
 	
+	@FutureOrPresent(message="not valid date")
 	@Column(name="booked_to")
 	private LocalDate bookedTo;
 	
@@ -47,7 +51,7 @@ public class Booking {
 		this.enabled = enabled;
 	}
 
-	public Boolean isEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
