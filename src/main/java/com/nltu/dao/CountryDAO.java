@@ -20,6 +20,4 @@ public interface CountryDAO {
 
     List<Hotel> findAvailableHotelsByCountry(int id);
 
-    Boolean checkCountryExists(String countryName);
-
 }

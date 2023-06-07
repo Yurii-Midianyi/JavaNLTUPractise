@@ -83,19 +83,6 @@ public class CountryDAOimpl implements CountryDAO {
 
         return hotels;
     }
-
-    @Override
-    public Boolean checkCountryExists(String countryName) {
-        Session currentSession = sessionFactory.getCurrentSession();
-
-        Query<Country> theQuery =
-                currentSession.createQuery("from Country where countryName = :countryName", Country.class);
-        theQuery.setParameter("countryName", countryName);
-
-        List<Country> countries = theQuery.getResultList();
-
-        return !countries.isEmpty();
-    }
 }
 
 
