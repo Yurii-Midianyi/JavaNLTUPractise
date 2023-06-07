@@ -16,5 +16,4 @@ public interface RoomDAO {
 
 	public List<Room> getAvailableRooms(int hotelId);
 	
-	public Boolean checkRoomExists(int roomNumber);
 }

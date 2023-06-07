@@ -85,19 +85,4 @@ public class RoomDAOimpl implements RoomDAO {
 		return rooms;
 	}
 
-	@Override
-	public Boolean checkRoomExists(int roomNumber) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		
-		Query<Room> theQuery = 
-				currentSession.createQuery("from Room WHERE roomNumber=:roomNumber", Room.class);
-		theQuery.setParameter("roomNumber", roomNumber);
-		
-		List<Room> rooms = theQuery.getResultList();
-		
-		if(rooms.isEmpty()){
-			return false;
-		}
-		return true;
-	}
 }

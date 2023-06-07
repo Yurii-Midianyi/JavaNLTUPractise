@@ -68,7 +68,7 @@ public class RoomController {
 	public String saveRoom(@Valid @ModelAttribute("room") Room theRoom,
 						   BindingResult bindingResult) {
 		
-		if(roomService.checkRoomExists(theRoom.getRoomNumber())) {
+		if(roomService.checkRoomExists(theRoom.getRoomNumber(), theRoom.getHotel().getId())) {
 			bindingResult.rejectValue("roomNumber", "error.roomNumber", "This room number already exists");
 		}
 		
