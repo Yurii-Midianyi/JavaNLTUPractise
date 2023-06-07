@@ -1,6 +1,7 @@
 package com.nltu.service;
 
 import com.nltu.dao.HotelDAO;
+import com.nltu.entity.Country;
 import com.nltu.entity.Hotel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,18 +26,19 @@ public class HotelServiceImpl implements HotelService{
     @Override
     @Transactional
     public List<Hotel> getHotels() { // i didn`t change it, bcz i don`t understand it
-        //get current hibernate session
-        Session currentSession = sessionFactory.getCurrentSession();
-
-        //create a query
-        Query<Hotel> theQuery =
-                currentSession.createQuery("from Hotel", Hotel.class);
-
-        //execute query and get result list
-        List<Hotel> hotels = theQuery.getResultList();
-
-        //return the results
-        return hotels;
+//        //get current hibernate session
+//        Session currentSession = sessionFactory.getCurrentSession();
+//
+//        //create a query
+//        Query<Hotel> theQuery =
+//                currentSession.createQuery("from Hotel", Hotel.class);
+//
+//        //execute query and get result list
+//        List<Hotel> hotels = theQuery.getResultList();
+//
+//        //return the results
+//        return hotels;
+        return hotelDAO.getHotels();
     }
 
     @Override
@@ -67,5 +69,21 @@ public class HotelServiceImpl implements HotelService{
     @Transactional
     public void delete(int id) {
         hotelDAO.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public Boolean checkHotelExists(String hotelName, int countryId) {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        Query<Hotel> theQuery =
+                currentSession.createQuery("from Hotel where hotelName = :hotelName" +
+                        " and country.id = :countryId", Hotel.class);
+        theQuery.setParameter("hotelName", hotelName);
+        theQuery.setParameter("countryId", countryId);
+
+        List<Hotel> hotels = theQuery.getResultList();
+
+        return !hotels.isEmpty();
     }
 }

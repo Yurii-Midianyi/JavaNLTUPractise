@@ -16,4 +16,6 @@ public interface HotelService {
     void update(int id, Hotel updateHotel);
 
     void delete(int id);
+
+    Boolean checkHotelExists(String hotelName, int countryId);
 }
