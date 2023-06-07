@@ -72,8 +72,8 @@ public class BookingServiceImpl implements BookingService {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<Booking> theQuery =
-				currentSession.createQuery("from Booking where room.id =:roomId AND bookedSince BETWEEN "
-				+ ":bookedSince AND :bookedTo OR bookedTo BETWEEN :bookedSince AND :bookedTo" , Booking.class);
+				currentSession.createQuery("from Booking WHERE enabled=1 AND room.id =:roomId AND (bookedSince BETWEEN "
+				+ ":bookedSince AND :bookedTo OR bookedTo BETWEEN :bookedSince AND :bookedTo)" , Booking.class);
 		theQuery.setParameter("bookedSince", bookedSince);
 		theQuery.setParameter("bookedTo", bookedTo);
 		theQuery.setParameter("roomId", roomId);

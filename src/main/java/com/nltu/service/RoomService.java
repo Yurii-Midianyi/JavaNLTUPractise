@@ -18,5 +18,5 @@ public interface RoomService {
 
 	public void deleteRoom(int roomId);
 
-	public Boolean checkRoomExists(int roomNumber);
+	public Boolean checkRoomExists(int roomNumber, int hotelId);
 }
