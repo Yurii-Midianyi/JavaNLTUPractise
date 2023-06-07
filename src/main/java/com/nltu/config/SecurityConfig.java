@@ -33,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .failureUrl("/login")
                 .permitAll();
     }
+    // username = test@gmail.com    password = password
+    // username = test1@gmail.com   password = password1
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
