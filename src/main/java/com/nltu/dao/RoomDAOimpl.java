@@ -51,12 +51,15 @@ public class RoomDAOimpl implements RoomDAO {
 	@Override
 	public void deleteRoom(int roomId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-//		Room room = currentSession.get(Room.class, roomId);
-//		currentSession.remove(room);
-		Query<?> theQuery = currentSession.createQuery("update Room set enabled = false where id = :roomId");
-	    theQuery.setParameter("roomId", roomId);
-	    theQuery.executeUpdate();	
+		Room room = currentSession.get(Room.class, roomId);
+		if(room.getBookings().isEmpty()) {
+			currentSession.remove(room);
+		}
+		else {
+			Query<?> theQuery = currentSession.createQuery("update Room set enabled = false where id = :roomId");
+		    theQuery.setParameter("roomId", roomId);
+		    theQuery.executeUpdate();	
+		}	
 	}
 
 	@Override
