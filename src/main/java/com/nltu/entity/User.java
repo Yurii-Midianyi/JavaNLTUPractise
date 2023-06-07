@@ -42,6 +42,14 @@ public class User {
 	
 	public User(){}
 
+	public User(String username, String password, boolean enabled, Role role, List<Booking> bookings) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.role = role;
+		this.bookings = bookings;
+	}
+
 	public int getId() {
 		return id;
 	}
