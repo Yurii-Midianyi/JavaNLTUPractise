@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="<c:url value="/resources/css/main.css?version=51" />" rel="stylesheet">
     <title>New country</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
 <%--</form>--%>
 <form:form action="${pageContext.request.contextPath}/countries" modelAttribute="country" method="POST">
     <label for="name">Enter name: </label>
-    <form:input path="countryName" id="name"/>
+    <form:input path="countryName" id="name"/><form:errors path="countryName" cssClass="form-error"/>
     <form:select path="enabled">
         <form:option value="true" label="true"/>
         <form:option value="false" label="false"/>

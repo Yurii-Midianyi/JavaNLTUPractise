@@ -5,8 +5,10 @@ import com.nltu.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -42,9 +44,18 @@ public class CountriesController {
     }
 
     @PostMapping
-    public String createCountry(@ModelAttribute("country") Country country) {
-        countryService.saveCountry(country);
-        return "redirect:/countries";
+    public String createCountry(@Valid @ModelAttribute("country") Country country,
+                                BindingResult bindingResult) {
+        if (countryService.checkCountryExists(country.getCountryName()))
+            bindingResult.rejectValue("countryName", "error.countryName",
+                    "This country is already exists");
+
+        if(bindingResult.hasErrors())
+            return "countries/new";
+        else {
+            countryService.saveCountry(country);
+            return "redirect:/countries";
+        }
     }
 
     @GetMapping("/{id}/edit")

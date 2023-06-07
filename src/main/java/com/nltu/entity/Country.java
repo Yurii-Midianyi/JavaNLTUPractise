@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import javax.validation.constraints.NotEmpty;
+
 @Entity
 @Table(name="country")
 public class Country {
@@ -17,7 +19,8 @@ public class Country {
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
+
+	@NotEmpty(message = "can't be empty")
 	@Column(name="country_name")
 	private String countryName;
 
