@@ -3,6 +3,9 @@ package com.nltu.entity;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,10 +16,12 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Min(value=1, message="must be greater than 0")
+	@Max(value=10, message="must be less than or equal to 10")
 	@Column(name="capacity")
 	private int capacity;
 	
-	@Column(name="room_number")
+	@Column(name="room_number", unique = true)
 	private int roomNumber;
 
 	@Column(name="enabled")

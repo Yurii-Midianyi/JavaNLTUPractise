@@ -2,9 +2,12 @@ package com.nltu.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
 import com.nltu.service.HotelService;
 import com.nltu.service.RoomService;
+import com.nltu.service.UserService;
 
 @Controller
 @RequestMapping("/room")
@@ -25,6 +29,9 @@ public class RoomController {
 	
 	@Autowired
 	private HotelService hotelService; 
+	
+	@Autowired
+	private UserService userService; 
 		
 	@GetMapping("/list/{hotelId}")
 	public String showList(@PathVariable int hotelId, Model model) {
@@ -58,10 +65,20 @@ public class RoomController {
 	}
 	
 	@PostMapping("/saveRoom")
-	public String saveRoom(@ModelAttribute("room") Room theRoom) {
+	public String saveRoom(@Valid @ModelAttribute("room") Room theRoom,
+						   BindingResult bindingResult) {
 		
-		roomService.saveRoom(theRoom);
-		return "redirect:/room/list/"+theRoom.getHotel().getId();
+		if(roomService.checkRoomExists(theRoom.getRoomNumber())) {
+			bindingResult.rejectValue("roomNumber", "error.roomNumber", "This room number already exists");
+		}
+		
+		if(bindingResult.hasErrors()) {
+			return "room-form";
+		}
+		else {
+			roomService.saveRoom(theRoom);
+			return "redirect:/room/list/"+theRoom.getHotel().getId();
+		}
 	}
 	
 	@GetMapping("/showFormForUpdate/{roomId}")
@@ -79,12 +96,14 @@ public class RoomController {
 		roomService.deleteRoom(roomId);		
 		return "redirect:/room/list/"+hotelId;
 	}
-	
+
 	@GetMapping("/book/{roomId}")
 	public String bookRoom(@PathVariable int roomId, Model model) {				
 		Booking booking = new Booking();
-		model.addAttribute("booking", booking);
-		model.addAttribute("roomId", roomId);
+		booking.setRoom(roomService.getRoom(roomId));
+		booking.setUser(userService.getUser(1)); //hardcoded user
+		model.addAttribute("booking", booking);	
 		return "booking-form";
 	}
+		
 }

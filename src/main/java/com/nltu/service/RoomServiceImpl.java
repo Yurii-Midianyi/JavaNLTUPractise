@@ -63,4 +63,10 @@ public class RoomServiceImpl implements RoomService {
 	public List<Room> getAvailableRooms(int hotelId) {
 		return roomDAO.getAvailableRooms(hotelId);	
 	}
+
+	@Override
+	@Transactional
+	public Boolean checkRoomExists(int roomNumber) {
+		return roomDAO.checkRoomExists(roomNumber);
+	}
 }

@@ -2,29 +2,42 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-    <title>Save Booking</title>
+    <link href="<c:url value="/resources/css/main.css?version=51" />" rel="stylesheet">
+    <title>Save room</title>
 </head>
 <body>
 	
-	<form action="${pageContext.request.contextPath}/booking/saveBooking" method="POST">
+	<form:form action="${pageContext.request.contextPath}/booking/saveBooking" modelAttribute="booking" method="POST">
 		<table>
 			<tbody>
-				 
 				<tr>
 					<td><label>bookedSince:</label></td>
-					<td><input type="date" name="bookedSince"></td>					
+					<td>
+						<form:input type="date" path="bookedSince"/>
+						<form:errors path="bookedSince" cssClass="form-error"/>
+					</td>					
 				</tr>
 				
 				<tr>
-					<td><label>bookedTo:</label></td>
-					<td><input type="date" name="bookedTo"></td>					
+					<td><label>booked to:</label></td>
+					<td>
+						<form:input type="date" path="bookedTo"/>
+						<form:errors path="bookedTo" cssClass="form-error"/>
+					</td>					
 				</tr>
-					
-				<tr>
-					<td><input type="hidden" name="roomId"  value="${roomId}"></td>					
+				
+				<tr>				
+					<td><form:input type="hidden" path="enabled" value="true"/></td>					
+				</tr> 	
+				
+				<tr>				
+					<td><form:input type="hidden" path="room.id"/></td>					
+				</tr> 
+				
+				<tr>				
+					<td><form:input type="hidden" path="user.id"/></td>					
 				</tr>
-									
+			
 				<tr>
 					<td><label></label></td>
 					<td><input type="submit" value="Save"/></td>					
@@ -32,7 +45,7 @@
 			
 			</tbody>
 		</table>
-	</form>
+	</form:form>
 	
 	<a href="${pageContext.request.contextPath}/booking/list">Back to List</a>
 	

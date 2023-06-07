@@ -1,22 +1,20 @@
 package com.nltu.controller;
 
-import java.time.LocalDate;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.nltu.entity.Booking;
-import com.nltu.entity.Room;
-import com.nltu.entity.User;
 import com.nltu.service.BookingService;
 import com.nltu.service.RoomService;
 import com.nltu.service.UserService;
-
 import jakarta.transaction.Transactional;
 
 
@@ -47,24 +45,25 @@ public class BookingController {
 		return "bookingList";
 	}
 	
-	
-	@PostMapping("/saveBooking")
-	//public String saveRoom(@ModelAttribute("booking") Booking booking) {
-	public String Booking(@RequestParam("bookedSince") String bookedSince,
-						   @RequestParam("bookedTo") String bookedTo,
-						   @RequestParam("roomId") int roomId) {
+	@PostMapping("/saveBooking")	
+	public String booking(@Valid @ModelAttribute("booking") Booking booking,
+			   BindingResult bindingResult) {
 		
+		if(!bookingService.checkIfBookingIsAvailable(booking.getRoom().getId(), 
+				booking.getBookedSince(), 
+				booking.getBookedTo())) {
+			bindingResult.rejectValue("bookedSince", "error.bookedSince", "This date in unavailable");
+			System.out.println(bindingResult);
+		}
 		
-		Room room = roomService.getRoom(roomId);
-		User user = userService.getUser(1); //hardcoded user change later
+		if(bindingResult.hasErrors()) {
+			return "booking-form";
+		}
 		
-			
-		Booking booking = new Booking(LocalDate.parse(bookedSince), 
-									  LocalDate.parse(bookedTo), 
-									  room, user, true);
 		bookingService.saveBooking(booking);
-		return "redirect:/booking/list";
+		return "redirect:/booking/list";		
 	}
+	
 
 	@GetMapping("/list/{userId}")
 	@Transactional
