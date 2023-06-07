@@ -20,8 +20,8 @@ public class Country {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@NotEmpty(message = "can't be empty")
-	@Column(name="country_name")
+	@NotEmpty(message = "This can't be empty")
+	@Column(name="country_name", unique = true)
 	private String countryName;
 
 	@Column(name="enabled")
