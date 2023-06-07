@@ -3,6 +3,9 @@ package com.nltu.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.nltu.dao.UserDAO;
@@ -11,7 +14,7 @@ import com.nltu.entity.User;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserDAO userDAO;
@@ -32,5 +35,21 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public void deleteUser(int id) {
 		userDAO.deleteUser(id);
+	}
+
+	@Override
+	@Transactional
+	public User getUsername(String username) {
+		return userDAO.getUsername(username);
+	}
+
+
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+		User user = userDAO.getUsername(s);
+		if (user == null)
+			throw new UsernameNotFoundException("User not found");
+		return new com.nltu.security.UserDetails(user);
 	}
 }

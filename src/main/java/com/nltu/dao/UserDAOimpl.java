@@ -41,6 +41,14 @@ public class UserDAOimpl implements UserDAO{
 	}
 
 	@Override
+	public User getUsername(String username) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<User> query = currentSession.createQuery("FROM User WHERE username = :username", User.class);
+		query.setParameter("username", username);
+		return query.uniqueResult();
+	}
+
+	@Override
 	public void deleteUser(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
 

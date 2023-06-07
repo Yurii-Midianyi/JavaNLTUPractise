@@ -59,12 +59,12 @@
         Login
         <span class="underline"></span>
       </button>
-      <form method="POST" action="#" class="form form-login">
+      <form method="POST" action="/process_login" class="form form-login">
         <fieldset>
           <legend>Please, enter your email and password for login.</legend>
           <div class="input-block">
             <label for="login-email">E-mail</label>
-            <input id="login-email" class="email" type="email" name="email" required>
+            <input id="login-email" class="email" type="email" name="username" required>
           </div>
           <div class="input-block">
             <label for="login-password">Password</label>
