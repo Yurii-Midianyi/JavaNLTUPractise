@@ -21,8 +21,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NotEmpty(message = "Role name can't be empty")
-	@Column(name="role_name", unique = true)
+	@Column(name="role_name")
 	private String roleName;
 
 	@Column(name="enabled")
