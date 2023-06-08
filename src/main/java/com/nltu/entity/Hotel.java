@@ -25,7 +25,7 @@ public class Hotel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NotEmpty(message = "This can't be empty")
+	@NotEmpty(message = "Hotel name can't be empty")
 	@Column(name="hotel_name", unique = true)
 	private String hotelName;
 

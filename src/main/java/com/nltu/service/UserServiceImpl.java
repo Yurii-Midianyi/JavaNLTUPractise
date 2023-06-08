@@ -2,6 +2,9 @@ package com.nltu.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,15 @@ import jakarta.transaction.Transactional;
 @Service
 public class UserServiceImpl implements UserService{
 
+	private final SessionFactory sessionFactory;
+	private final UserDAO userDAO;
+
 	@Autowired
-	private UserDAO userDAO;
-	
+	public UserServiceImpl(SessionFactory sessionFactory, UserDAO userDAO) {
+		this.sessionFactory = sessionFactory;
+		this.userDAO = userDAO;
+	}
+
 	@Override
 	@Transactional
 	public List<User> getUsers() {
@@ -32,5 +41,19 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public void deleteUser(int id) {
 		userDAO.deleteUser(id);
+	}
+
+	@Override
+	@Transactional
+	public Boolean checkUserExists(String username) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<User> theQuery =
+				currentSession.createQuery("from User where username = :username", User.class);
+		theQuery.setParameter("username", username);
+
+		List<User> users = theQuery.getResultList();
+
+		return !users.isEmpty();
 	}
 }

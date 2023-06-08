@@ -20,7 +20,7 @@ public class Country {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@NotEmpty(message = "This can't be empty")
+	@NotEmpty(message = "Country name can't be empty")
 	@Column(name="country_name", unique = true)
 	private String countryName;
 

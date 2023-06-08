@@ -14,6 +14,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import javax.validation.constraints.NotEmpty;
+
 @Entity
 @Table(name="user")
 public class User {
@@ -21,10 +23,12 @@ public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="username")
+
+	@NotEmpty(message = "Username can't be empty")
+	@Column(name="username", unique = true)
 	private String username;
-	
+
+	@NotEmpty(message = "Password can't be empty")
 	@Column(name="password")
 	private String password;
 	

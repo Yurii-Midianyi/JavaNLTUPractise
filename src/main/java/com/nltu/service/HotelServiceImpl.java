@@ -16,7 +16,7 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService{
 
     private final SessionFactory sessionFactory;
-    private HotelDAO hotelDAO;
+    private final HotelDAO hotelDAO;
     @Autowired
     public HotelServiceImpl(SessionFactory sessionFactory, HotelDAO hotelDAO) {
         this.sessionFactory = sessionFactory;
