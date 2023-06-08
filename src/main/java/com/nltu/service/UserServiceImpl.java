@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userDAO.getUsername(username);
 	}
 
+	@Override
+	@Transactional
+	public void save(User user) {
+		userDAO.save(user);
+	}
 
 	@Override
 	@Transactional

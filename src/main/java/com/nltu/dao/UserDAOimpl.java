@@ -48,7 +48,13 @@ public class UserDAOimpl implements UserDAO{
 		return query.uniqueResult();
 	}
 
-	@Override
+    @Override
+    public void save(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(user);
+    }
+
+    @Override
 	public void deleteUser(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
