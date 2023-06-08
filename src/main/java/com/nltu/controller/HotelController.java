@@ -8,10 +8,13 @@ import com.nltu.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.nltu.entity.Hotel;
 
 import jakarta.transaction.Transactional;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/hotel")
@@ -53,9 +56,20 @@ public class HotelController {
 		return "/hotels/new";
 	}
 	@PostMapping("/list")
-	public String create(@ModelAttribute("hotel") Hotel hotel){
-		hotelService.save(hotel);
-		return "redirect:/hotel/list";
+	public String create(Model model, @Valid @ModelAttribute("hotel") Hotel hotel,
+						 BindingResult bindingResult){
+		if (hotelService.checkHotelExists(hotel.getHotelName(), hotel.getCountry().getId()))
+			bindingResult.rejectValue("hotelName", "error.hotelName",
+					"This hotel is already exists");
+
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("countries", countryService.getCountries());
+			return "hotels/new";
+		}
+		else {
+			hotelService.save(hotel);
+			return "redirect:/hotel/list";
+		}
 	}
 
 	@GetMapping("/{id}/edit")

@@ -1,16 +1,12 @@
 package com.nltu.dao;
 
 import com.nltu.entity.Country;
-
 import com.nltu.entity.Hotel;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.hibernate.query.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

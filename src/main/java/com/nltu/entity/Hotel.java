@@ -15,6 +15,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import javax.validation.constraints.NotEmpty;
+
 @Entity
 @Table(name="hotel")
 public class Hotel {
@@ -22,8 +24,9 @@ public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="hotel_name")
+
+	@NotEmpty(message = "Hotel name can't be empty")
+	@Column(name="hotel_name", unique = true)
 	private String hotelName;
 
 	@Column(name="enabled")
