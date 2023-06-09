@@ -38,7 +38,8 @@ public class Hotel {
 
 	@OneToMany(mappedBy ="hotel",
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-					CascadeType.DETACH, CascadeType.REFRESH})
+					CascadeType.DETACH, CascadeType.REFRESH,
+					CascadeType.REMOVE})
 	private List<Room> rooms;
 	
 	public Hotel() {}
