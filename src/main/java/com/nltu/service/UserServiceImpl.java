@@ -2,6 +2,9 @@ package com.nltu.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,9 +19,15 @@ import jakarta.transaction.Transactional;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
+	private final SessionFactory sessionFactory;
+	private final UserDAO userDAO;
+
 	@Autowired
-	private UserDAO userDAO;
-	
+	public UserServiceImpl(SessionFactory sessionFactory, UserDAO userDAO) {
+		this.sessionFactory = sessionFactory;
+		this.userDAO = userDAO;
+	}
+
 	@Override
 	@Transactional
 	public List<User> getUsers() {
@@ -39,22 +48,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	@Transactional
-	public User getUsername(String username) {
-		return userDAO.getUsername(username);
+
+	public Boolean checkUserExists(String username) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<User> theQuery =
+				currentSession.createQuery("from User where username = :username", User.class);
+		theQuery.setParameter("username", username);
+
+		List<User> users = theQuery.getResultList();
+
+		return !users.isEmpty();
+
 	}
 
 	@Override
-	@Transactional
-	public void save(User user) {
-		userDAO.save(user);
-	}
-
-	@Override
-	@Transactional
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		User user = userDAO.getUsername(s);
-		if (user == null)
-			throw new UsernameNotFoundException("User not found");
-		return new com.nltu.security.UserDetails(user);
+		return null;
 	}
 }

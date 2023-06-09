@@ -3,6 +3,9 @@ package com.nltu.service;
 import com.nltu.dao.CountryDAO;
 import com.nltu.entity.Country;
 import com.nltu.entity.Hotel;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,10 +15,12 @@ import java.util.List;
 @Service
 public class CountryServiceImpl implements CountryService {
 
+    private final SessionFactory sessionFactory;
     private final CountryDAO countryDAO;
 
     @Autowired
-    public CountryServiceImpl(CountryDAO countryDAO) {
+    public CountryServiceImpl(SessionFactory sessionFactory, CountryDAO countryDAO) {
+        this.sessionFactory = sessionFactory;
         this.countryDAO = countryDAO;
     }
 
@@ -59,5 +64,19 @@ public class CountryServiceImpl implements CountryService {
     @Transactional
     public List<Hotel> findAvailableHotelsByCountry(int id) {
         return countryDAO.findAvailableHotelsByCountry(id);
+    }
+
+    @Override
+    @Transactional
+    public Boolean checkCountryExists(String countryName) {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        Query<Country> theQuery =
+                currentSession.createQuery("from Country where countryName = :countryName", Country.class);
+        theQuery.setParameter("countryName", countryName);
+
+        List<Country> countries = theQuery.getResultList();
+
+        return !countries.isEmpty();
     }
 }

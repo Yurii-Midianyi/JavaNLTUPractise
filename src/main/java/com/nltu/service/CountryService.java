@@ -21,4 +21,6 @@ public interface CountryService {
 
     List<Hotel> findAvailableHotelsByCountry(int id);
 
+    Boolean checkCountryExists(String countryName);
+
 }

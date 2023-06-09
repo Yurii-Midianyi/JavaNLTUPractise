@@ -2,9 +2,11 @@ package com.nltu.service;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import com.nltu.dao.HotelDAO;
 import com.nltu.dao.RoomDAO;
 import com.nltu.entity.Hotel;
@@ -15,6 +17,9 @@ import jakarta.transaction.Transactional;
 @Service
 public class RoomServiceImpl implements RoomService {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	@Autowired
 	private RoomDAO roomDAO;
 	
@@ -66,7 +71,21 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	@Transactional
-	public Boolean checkRoomExists(int roomNumber) {
-		return roomDAO.checkRoomExists(roomNumber);
+	public Boolean checkRoomExists(int roomNumber, int hotelId) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<Room> theQuery = 
+				currentSession.createQuery("from Room WHERE roomNumber=:roomNumber "
+										 + "AND hotel.id=:hotelId", Room.class);
+		theQuery.setParameter("roomNumber", roomNumber);
+		theQuery.setParameter("hotelId", hotelId);
+		
+		List<Room> rooms = theQuery.getResultList();
+		
+		if(rooms.isEmpty()){
+			return false;
+		}
+		return true;
 	}
 }

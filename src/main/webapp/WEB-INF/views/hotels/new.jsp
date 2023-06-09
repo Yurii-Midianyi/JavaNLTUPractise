@@ -10,11 +10,15 @@
 
 <form:form action="${pageContext.request.contextPath}/hotel/list" method="POST" modelAttribute="hotel">
     <label for="name">Enter name: </label>
-    <form:input path="hotelName" id="name"/>
+    <form:input path="hotelName" id="name"/><form:errors path="hotelName" cssClass="form-error"/>
     <br/>
     <label for="country">Country</label>
     <form:select path="country.id" id="country">
         <form:options items="${countries}" itemValue="id" itemLabel="countryName" />
+    </form:select><br>
+    <form:select path="enabled">
+        <form:option value="true" label="true"/>
+        <form:option value="false" label="false"/>
     </form:select><br>
     <input type="submit" value="Create">
 </form:form>

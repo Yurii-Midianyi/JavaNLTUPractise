@@ -30,9 +30,9 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public  String registration(@ModelAttribute("user") User user){
-       userService.save(user);
-       return "redirect:/login";
-    }
+//    @PostMapping("/login")
+//    public  String registration(@ModelAttribute("user") User user){
+//       userService.save(user);
+//       return "redirect:/login";
+//    }
 }
