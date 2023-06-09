@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
@@ -35,7 +35,7 @@
           <a class="nav-link fs-3" href="<c:url value="/hotel/list" />">Hotel page</a>
         </li>
         <li class="nav-item mx-auto" style="padding: 0 10px">
-          <a class="nav-link fs-3" href="<c:url value="/login" />">Login page</a>
+          <a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
         </li>
       </ul>
     </div>
@@ -82,7 +82,7 @@
         Sign Up
         <span class="underline"></span>
       </button>
-      <form:form method="POST" action="/login" class="form form-signup" modelAttribute="user">
+        <form:form method="POST" action="/login" class="form form-signup" modelAttribute="user">
         <fieldset>
           <legend>Please, enter your email, password and password confirmation for sign up.
           </legend>
