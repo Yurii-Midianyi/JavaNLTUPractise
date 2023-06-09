@@ -12,7 +12,9 @@ public interface UserService {
 
 	void deleteUser(int id);
 
-
 	Boolean checkUserExists(String username);
+
+	User getUsername(String username);
+	void save(User user);
 
 }

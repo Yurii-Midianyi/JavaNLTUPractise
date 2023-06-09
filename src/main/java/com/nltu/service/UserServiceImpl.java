@@ -62,8 +62,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	}
 
+    @Override
+	@Transactional
+	public User getUsername(String username) {
+		return userDAO.getUsername(username);
+	}
+
+
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		return null;
+		User user = userDAO.getUsername(s);
+		if (user == null)
+			throw new UsernameNotFoundException("User not found");
+		return new com.nltu.security.UserDetails(user);
+	}
+	@Override
+	@Transactional
+	public void save(User user) {
+		userDAO.save(user);
 	}
 }
