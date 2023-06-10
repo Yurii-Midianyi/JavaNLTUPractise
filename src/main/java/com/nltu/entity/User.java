@@ -31,6 +31,11 @@ public class User {
 	@NotEmpty(message = "Password can't be empty")
 	@Column(name="password")
 	private String password;
+
+	@Column(name = "firstname")
+	private String firstname;
+	@Column(name = "lastname")
+	private String lastname;
 	
 	@Column(name="enabled")
 	private boolean enabled;
@@ -46,6 +51,14 @@ public class User {
 	
 	public User(){}
 
+	public User(String username, String password, boolean enabled, Role role, List<Booking> bookings) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.role = role;
+		this.bookings = bookings;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -60,6 +73,22 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getPassword() {

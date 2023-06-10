@@ -1,5 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet">
@@ -33,7 +35,7 @@
           <a class="nav-link fs-3" href="<c:url value="/hotel/list" />">Hotel page</a>
         </li>
         <li class="nav-item mx-auto" style="padding: 0 10px">
-          <a class="nav-link fs-3" href="<c:url value="/login" />">Login page</a>
+          <a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
         </li>
       </ul>
     </div>
@@ -59,12 +61,12 @@
         Login
         <span class="underline"></span>
       </button>
-      <form method="POST" action="#" class="form form-login">
+      <form method="POST" action="/process_login" class="form form-login">
         <fieldset>
           <legend>Please, enter your email and password for login.</legend>
           <div class="input-block">
             <label for="login-email">E-mail</label>
-            <input id="login-email" class="email" type="email" name="email" required>
+            <input id="login-email" class="email" type="email" name="username" required>
           </div>
           <div class="input-block">
             <label for="login-password">Password</label>
@@ -80,21 +82,21 @@
         Sign Up
         <span class="underline"></span>
       </button>
-      <form method="POST" action="#" class="form form-signup">
+        <form:form method="POST" action="/login" class="form form-signup" modelAttribute="user">
         <fieldset>
           <legend>Please, enter your email, password and password confirmation for sign up.
           </legend>
           <div class="input-block">
             <label for="signup-email">E-mail</label>
-            <input id="signup-email" type="email" name="email" required>
+            <input id="signup-email" type="email" name="username" required>
           </div>
           <div class="input-block">
             <label for="signup-firstname-confirm">first name</label>
-            <input id="signup-firstname-confirm" type="text" name="firstName" required>
+            <input id="signup-firstname-confirm" type="text" name="firstname" required>
           </div>
           <div class="input-block">
             <label for="signup-lastName-confirm">last name</label>
-            <input id="signup-lastName-confirm" type="text" name="lastName" required>
+            <input id="signup-lastName-confirm" type="text" name="lastname" required>
           </div>
           <div class="input-block">
             <label for="signup-password">Password</label>
@@ -102,7 +104,7 @@
           </div>
         </fieldset>
         <button type="submit" class="btn-signup">Continue</button>
-      </form>
+      </form:form>
     </div>
   </div>
 </div>
