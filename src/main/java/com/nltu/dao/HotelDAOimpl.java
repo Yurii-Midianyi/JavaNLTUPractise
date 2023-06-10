@@ -2,6 +2,7 @@ package com.nltu.dao;
 
 import java.util.List;
 
+import com.nltu.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -79,10 +80,34 @@ public class HotelDAOimpl implements HotelDAO {
     @Transactional
 	public void delete(int id) {
 		Session session = sessionFactory.getCurrentSession();
-//		session.remove(session.get(Hotel.class, id));
+		Hotel hotel = session.get(Hotel.class, id);
 
-		Query<?> theQuery = session.createQuery("update Hotel set enabled = false where id = :id");
-		theQuery.setParameter("id", id);
-		theQuery.executeUpdate();
+		if (!bookingsExist(hotel)) {
+			session.remove(hotel);
+		}
+		else { //need to rewrite this
+			Query<?> theQuery = session.createQuery("update Hotel set enabled = false where id = :id");
+			theQuery.setParameter("id", id);
+			theQuery.executeUpdate();
+
+			theQuery = session.createQuery("update Room set enabled = false where hotel = :hotel");
+			theQuery.setParameter("hotel", hotel);
+			theQuery.executeUpdate();
+
+			for (Room room: hotel.getRooms()) {
+				theQuery = session.createQuery("update Booking set enabled = false where room = :room");
+				theQuery.setParameter("room", room);
+				theQuery.executeUpdate();
+			}
+		}
+	}
+
+	private Boolean bookingsExist(Hotel hotel) {
+		for (Room room: hotel.getRooms()) {
+			if (!room.getBookings().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

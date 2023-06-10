@@ -59,6 +59,10 @@ public class RoomDAOimpl implements RoomDAO {
 			Query<?> theQuery = currentSession.createQuery("update Room set enabled = false where id = :roomId");
 		    theQuery.setParameter("roomId", roomId);
 		    theQuery.executeUpdate();	
+		    
+		    Query<?> query = currentSession.createQuery("update Booking set enabled = false where room.id = :roomId");
+		    query.setParameter("roomId", roomId);
+		    query.executeUpdate();	
 		}	
 	}
 
