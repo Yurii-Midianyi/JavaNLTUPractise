@@ -11,7 +11,7 @@
 		<table>
 			<tbody>
 				<tr>
-					<td><label>bookedSince:</label></td>
+					<td><label>booked since:</label></td>
 					<td>
 						<form:input type="date" path="bookedSince"/>
 						<form:errors path="bookedSince" cssClass="form-error"/>

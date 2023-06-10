@@ -1,8 +1,13 @@
 package com.nltu.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
+import com.nltu.DTO.HotelDTO;
+import com.nltu.entity.Booking;
 import com.nltu.entity.Country;
+import com.nltu.service.BookingService;
 import com.nltu.service.CountryService;
 import com.nltu.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.nltu.entity.Hotel;
+import com.nltu.entity.Room;
 
 import jakarta.transaction.Transactional;
 
@@ -22,11 +28,13 @@ public class HotelController {
 	
 	private final HotelService hotelService;
 	private final CountryService countryService;
+	private final BookingService bookingService;
 	
 	@Autowired
-	public HotelController(HotelService hotelService, CountryService countryService) {
+	public HotelController(HotelService hotelService, CountryService countryService, BookingService bookingService) {
 		this.hotelService = hotelService;
 		this.countryService = countryService;
+		this.bookingService = bookingService;
 	}
 
 	@GetMapping("/list")
@@ -91,4 +99,27 @@ public class HotelController {
 		return "redirect:/hotel/list";
 	}
 
+	@PostMapping("/{id}")
+	public String showAllRoomsForPeriod(@PathVariable("id") int id, 
+										@RequestParam("bSince") String bSince,
+										@RequestParam("bTo") String bTo,
+										@RequestParam("hotelName") String hotelName,
+	                                    @RequestParam("hotelId") int hotelId,
+										Model model){
+		
+		//to fix issue with disappearing hotel.id 
+		model.addAttribute("hotel", new HotelDTO(hotelId, hotelName)); 
+		
+		if (bSince.isEmpty() || bTo.isEmpty()) {
+			model.addAttribute("errorMessage", "Please select both start and end dates.");		
+			return "hotels/show";
+		}
+		
+		LocalDate bookedSince = LocalDate.parse(bSince);
+		LocalDate bookedTo = LocalDate.parse(bTo);
+		List<Room> rooms = bookingService.getAllAvailableBookingForPeriod(id, bookedSince, bookedTo);
+		model.addAttribute("rooms", rooms);
+        return "hotels/show";
+	}
+	
 }
