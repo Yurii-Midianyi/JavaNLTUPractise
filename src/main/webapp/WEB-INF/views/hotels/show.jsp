@@ -42,13 +42,21 @@
 					<th>capacity</th>
 					<th>room number</th>
 					<th>hotel id</th>	
+					<th>Action</th>
 				</tr>
-				<c:forEach var="tempRoom" items="${rooms}">
+				
+	<c:forEach var="tempRoom" items="${rooms}">
+	<!-- create a booking link for every room -->
+	<c:url var ="bookingLink" value = "/room/book/${tempRoom.id}">					
+	</c:url>
 	    <tr>
 	        <td>${tempRoom.id}</td>
 	        <td>${tempRoom.capacity}</td>
 	        <td>${tempRoom.roomNumber}</td>
-	        <td>${tempRoom.hotel.id}</td> <!-- Access hotel's id -->     
+	        <td>${tempRoom.hotel.id}</td> <!-- Access hotel's id -->    
+	        <td> 
+        		<a href="${bookingLink}">Book</a>
+            </td> 
 	    </tr>  
 	</c:forEach>
 			</table>
