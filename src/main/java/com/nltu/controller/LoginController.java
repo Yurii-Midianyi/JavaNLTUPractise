@@ -1,22 +1,24 @@
 package com.nltu.controller;
 
 import com.nltu.entity.User;
+import com.nltu.service.RegistrationService;
 import com.nltu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
 
     private final UserService userService;
+    private final RegistrationService registrationService;
     @Autowired
-    public LoginController(UserService userService) {
+    public LoginController(UserService userService, RegistrationService registrationService) {
         this.userService = userService;
+        this.registrationService = registrationService;
     }
 //
     @GetMapping("/login")
@@ -32,7 +34,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public  String registration(@ModelAttribute("user") User user){
-       userService.save(user);
+       registrationService.register(user);
        return "redirect:/login";
     }
 }

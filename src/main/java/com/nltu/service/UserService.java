@@ -15,6 +15,4 @@ public interface UserService {
 	Boolean checkUserExists(String username);
 
 	User getUsername(String username);
-	void save(User user);
-
 }
