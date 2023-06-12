@@ -17,7 +17,7 @@ import com.nltu.entity.User;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService{
 
 	private final SessionFactory sessionFactory;
 	private final UserDAO userDAO;
@@ -68,18 +68,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userDAO.getUsername(username);
 	}
 
-
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		User user = userDAO.getUsername(s);
-		if (user == null)
-			throw new UsernameNotFoundException("User not found");
-		return new com.nltu.security.UserDetails(user);
-	}
-	@Override
-	@Transactional
-	public void save(User user) {
-		userDAO.save(user);
-	}
 }
