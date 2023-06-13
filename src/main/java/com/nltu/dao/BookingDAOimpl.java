@@ -8,6 +8,11 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.nltu.entity.Booking;
+import com.nltu.entity.Room;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaUpdate;
+import jakarta.persistence.criteria.Root;
 
 @Repository
 public class BookingDAOimpl implements BookingDAO{
@@ -69,9 +74,13 @@ public class BookingDAOimpl implements BookingDAO{
 	public void deleteBooking(int bookingId) {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
-
-		Query<?> theQuery = currentSession.createQuery("update Booking set enabled = false where id = :bookingId");
-	    theQuery.setParameter("bookingId", bookingId);
-	    theQuery.executeUpdate();	
+		
+//		Query<?> theQuery = currentSession.createQuery("update Booking set enabled = false where id = :bookingId");
+//	    theQuery.setParameter("bookingId", bookingId);
+//	    theQuery.executeUpdate();	
+		
+		Booking booking = currentSession.get(Booking.class, bookingId);
+		booking.setEnabled(false);	
+		currentSession.update(booking);
 	}
 }
