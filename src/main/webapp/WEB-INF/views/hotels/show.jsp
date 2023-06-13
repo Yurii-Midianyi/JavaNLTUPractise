@@ -15,7 +15,7 @@
     <input type="submit" value="Delete"/>
 </form>
 
-<h2>Find hotels for selected period</h2>
+<h2>Find Rooms for selected period</h2>
 <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
    <span>since:</span>
    <input type="date" name="bSince">
