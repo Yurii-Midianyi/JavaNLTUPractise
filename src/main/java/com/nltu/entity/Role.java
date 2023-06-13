@@ -34,6 +34,12 @@ public class Role {
 	
 	public Role() {}
 
+	public Role(String roleName, Boolean enabled, List<User> users) {
+		this.roleName = roleName;
+		this.enabled = enabled;
+		this.users = users;
+	}
+
 	public int getId() {
 		return id;
 	}
