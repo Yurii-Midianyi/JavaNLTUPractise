@@ -1,21 +1,23 @@
 package com.nltu.security;
 
+import java.util.Collection;
+import java.util.Collections;
 import com.nltu.entity.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private final User user;
-
     public UserDetails(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getRoleName()));
     }
 
     @Override

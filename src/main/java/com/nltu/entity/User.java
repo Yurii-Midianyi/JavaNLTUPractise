@@ -40,7 +40,7 @@ public class User {
 	@Column(name="enabled")
 	private boolean enabled;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = 
+	@ManyToOne(fetch = FetchType.EAGER, cascade =
 					{CascadeType.PERSIST, CascadeType.MERGE,
 					CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "role_id")
