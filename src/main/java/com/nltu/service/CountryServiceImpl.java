@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,6 +63,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_USER')")
     public List<Hotel> findAvailableHotelsByCountry(int id) {
         return countryDAO.findAvailableHotelsByCountry(id);
     }
