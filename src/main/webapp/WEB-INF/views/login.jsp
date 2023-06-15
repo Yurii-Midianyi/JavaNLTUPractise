@@ -37,9 +37,9 @@
         <li class="nav-item mx-auto" style="padding: 0 10px">
           <a class="nav-link fs-3" href="<c:url value="/hotel/list" />">Hotel page</a>
         </li>
-        <li class="nav-item mx-auto" style="padding: 0 10px">
-          <a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
-        </li>
+<%--        <li class="nav-item mx-auto" style="padding: 0 10px">--%>
+<%--          <a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>--%>
+<%--        </li>--%>
       </ul>
     </div>
   </div>
