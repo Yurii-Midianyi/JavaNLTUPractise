@@ -35,8 +35,8 @@ public class HomeController {
 
 	@GetMapping("/result")
 	public String result(Model model ,@ModelAttribute("country")Country country){
-		model.addAttribute("countries", countryService.findAvailableHotelsByCountry(country.getId()));
-		return "result";
+		model.addAttribute("hotels", countryService.findAvailableHotelsByCountry(country.getId()));
+		return "hotels/hotelList";
 	}
 
 
