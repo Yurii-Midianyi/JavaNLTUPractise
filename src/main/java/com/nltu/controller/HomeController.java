@@ -2,6 +2,7 @@ package com.nltu.controller;
 
 import com.nltu.dao.CountryDAOimpl;
 import com.nltu.entity.Country;
+import com.nltu.entity.Hotel;
 import com.nltu.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,8 @@ public class HomeController {
 	}
 
 	@GetMapping("/result")
-	public String result(Model model ,@ModelAttribute("country")Country country){
+	public String result(Model model , @ModelAttribute("country")Country country,
+						               @ModelAttribute("hotels")Hotel hotel){
 		model.addAttribute("countries", countryService.findAvailableHotelsByCountry(country.getId()));
 		return "result";
 	}
