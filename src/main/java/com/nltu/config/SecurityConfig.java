@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final UserDetailsService userDetailsService;
@@ -32,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/hotel/new").hasRole("MANAGER")
                 .antMatchers("/hotel/{id}/edit").hasRole("MANAGER")
                 .antMatchers("/booking/list").hasRole("MANAGER")
+                .antMatchers("/booking/**").hasAnyRole("MANAGER", "USER")
                 .antMatchers("/countries/new").hasRole("MANAGER")
                 .antMatchers("/countries/{id}/edit").hasRole("MANAGER")
                 .antMatchers("/room/showFormForAdd/{hotelId}").hasRole("MANAGER")
@@ -39,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/room/showFormForUpdate/{roomId}").hasRole("MANAGER")
                 .antMatchers("/room/delete/{roomId}").hasRole("MANAGER")
                 .antMatchers("/login").permitAll()
-                .anyRequest().hasAnyRole("USER", "MANAGER")
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

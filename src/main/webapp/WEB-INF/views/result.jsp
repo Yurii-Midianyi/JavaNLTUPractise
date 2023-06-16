@@ -15,7 +15,7 @@
 <body>
 <form:form action="/home/result" modelAttribute="countries" method="GET">
     <c:forEach var="country" items="${countries}">
-        <p>${country.hotelName}</p>
+        <a href="/hotel/${hotels.id}"><p>${country.hotelName}</p></a>
     </c:forEach>
 </form:form>
 </body>

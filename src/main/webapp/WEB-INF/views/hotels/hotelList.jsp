@@ -23,8 +23,7 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav ms-auto">
-			
+			<ul class="navbar-nav ms-auto">		
 				<security:authorize access="hasRole('MANAGER')">
 				<li class="nav-item mx-auto" style="padding: 0 10px">
 					<a class="nav-link fs-3" href="<c:url value="/management" />">Management page</a>
@@ -37,9 +36,29 @@
 				<li class="nav-item mx-auto" style="padding: 0 10px">
 					<a class="nav-link fs-3" href="<c:url value="/hotel/list" />">Hotel page</a>
 				</li>
-				<li class="nav-item mx-auto" style="padding: 0 10px">
-					<a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
-				</li>
+				<c:choose>
+					<c:when test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
+						<div>
+							<li class="nav-item mx-auto" style="padding: 0 10px">
+								<a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
+							</li>
+						</div>
+					</c:when>
+					<c:when test="${pageContext.request.isUserInRole('ROLE_USER')}">
+						<div>
+							<li class="nav-item mx-auto" style="padding: 0 10px">
+								<a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
+							</li>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div>
+							<li class="nav-item mx-auto" style="padding: 0 10px">
+								<a class="nav-link fs-3" href="<c:url value="/login" />">Login</a>
+							</li>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>

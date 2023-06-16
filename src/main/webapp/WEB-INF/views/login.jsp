@@ -26,18 +26,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <c:if test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
         <li class="nav-item mx-auto" style="padding: 0 10px">
           <a class="nav-link fs-3" href="<c:url value="/management" />">Management page</a>
         </li>
+        </c:if>
         <li class="nav-item mx-auto" style="padding: 0 10px">
           <a class="nav-link fs-3" href="<c:url value="/home" />">Home page</a>
         </li>
         <li class="nav-item mx-auto" style="padding: 0 10px">
           <a class="nav-link fs-3" href="<c:url value="/hotel/list" />">Hotel page</a>
         </li>
-        <li class="nav-item mx-auto" style="padding: 0 10px">
-          <a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
-        </li>
+<%--        <li class="nav-item mx-auto" style="padding: 0 10px">--%>
+<%--          <a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>--%>
+<%--        </li>--%>
       </ul>
     </div>
   </div>

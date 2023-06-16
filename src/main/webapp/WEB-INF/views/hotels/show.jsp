@@ -5,6 +5,7 @@
     <title>Hotel</title>
 </head>
 <body>
+<c:if test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
 <p>${hotel.hotelName}</p>
 <p>${hotel.id}</p>
 
@@ -14,7 +15,7 @@
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete"/>
 </form>
-
+</c:if>
 <h2>Find Rooms for selected period</h2>
 <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
    <span>since:</span>
