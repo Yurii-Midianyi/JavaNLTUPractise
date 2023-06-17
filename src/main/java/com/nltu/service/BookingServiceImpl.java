@@ -94,12 +94,14 @@ public class BookingServiceImpl implements BookingService {
 		}
 		
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Room> theQuery =
-				currentSession.createQuery("FROM Room r "
-						+ "LEFT JOIN r.bookings b "
-						+ "WHERE r.hotel.id = :hotelId "
-						+ "AND (b.bookedSince > :bookedTo OR b.bookedTo < :bookedSince OR b.id IS NULL)" , Room.class);
 		
+		  Query<Room> theQuery = 
+				  currentSession.createQuery("FROM Room r " +
+				  		"LEFT JOIN r.bookings b " + 
+				  		"WHERE r.hotel.id = :hotelId " +
+				  		"AND ((:bookedSince < b.bookedSince AND :bookedTo < b.bookedSince) "+
+				  		"OR (:bookedSince > b.bookedTo AND :bookedTo > b.bookedTo)"+
+				  		"OR b.id IS NULL)", Room.class);		 	
 		theQuery.setParameter("bookedSince", bookedSince);
 		theQuery.setParameter("bookedTo", bookedTo);
 		theQuery.setParameter("hotelId", hotelId);
@@ -107,10 +109,3 @@ public class BookingServiceImpl implements BookingService {
 		return theQuery.getResultList();
 	}
 }
-/*
- * currentSession.createQuery("SELECT r.id, r.capacity, r.enabled "
-						+ "FROM Room r "
-						+ "LEFT JOIN r.bookings b "
-						+ "WHERE r.hotel.id = :hotelId "
-						+ "AND (b.bookedSince > :bookedTo OR b.bookedTo < :bookedSince)" , Room.class);
- */
