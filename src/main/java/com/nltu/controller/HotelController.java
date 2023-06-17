@@ -40,7 +40,7 @@ public class HotelController {
 	@GetMapping("/list")
 	@Transactional
 	public String listCustomers(Model model) {
-		List<Hotel> theHotels = hotelService.getHotels();
+		List<Hotel> theHotels = hotelService.getAvailableHotels();
 		
 		//resolve issue with Lazy loading
 		theHotels.toString();
@@ -60,7 +60,7 @@ public class HotelController {
 	public String newHotel(Model model, @ModelAttribute("country") Country country){
 		model.addAttribute("hotel", new Hotel());
 		model.addAttribute("country", new Country());
-		model.addAttribute("countries", countryService.getCountries());
+		model.addAttribute("countries", countryService.getAvailableCountries());
 		return "/hotels/new";
 	}
 	@PostMapping("/list")
@@ -71,7 +71,7 @@ public class HotelController {
 					"This hotel is already exists");
 
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("countries", countryService.getCountries());
+			model.addAttribute("countries", countryService.getAvailableCountries());
 			return "hotels/new";
 		}
 		else {

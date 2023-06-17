@@ -43,6 +43,12 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     @Transactional
+    public List<Hotel> getAvailableHotels() {
+        return hotelDAO.getAvailableHotels();
+    }
+
+    @Override
+    @Transactional
     public Hotel getHotel(int id) {
         return hotelDAO.getHotel(id);
     }

@@ -8,6 +8,8 @@ import java.util.List;
 public interface CountryDAO {
     List<Country> getCountries();
 
+    List<Country> getAvailableCountries();
+
     Country getCountry(int id);
 
     void saveCountry(Country country);

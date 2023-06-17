@@ -29,7 +29,7 @@ public class HomeController {
 
     @GetMapping
 	public String selectCountry(Model model, @ModelAttribute("country") Country country){
-		model.addAttribute("countries", countryService.getCountries());
+		model.addAttribute("countries", countryService.getAvailableCountries());
 		return "home";
 	}
 

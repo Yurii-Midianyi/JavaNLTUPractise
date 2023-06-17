@@ -2,6 +2,7 @@ package com.nltu.dao;
 
 import java.util.List;
 
+import com.nltu.entity.Booking;
 import com.nltu.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,15 @@ public class HotelDAOimpl implements HotelDAO {
 		return hotels;
 	}
 
+	@Override
+	public List<Hotel> getAvailableHotels() {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<Hotel> theQuery =
+				currentSession.createQuery("from Hotel where enabled = true", Hotel.class);
+
+		return theQuery.getResultList();
+	}
 
 	@Override
 	@Transactional
@@ -85,20 +95,10 @@ public class HotelDAOimpl implements HotelDAO {
 		if (!bookingsExist(hotel)) {
 			session.remove(hotel);
 		}
-		else { //need to rewrite this
-			Query<?> theQuery = session.createQuery("update Hotel set enabled = false where id = :id");
-			theQuery.setParameter("id", id);
-			theQuery.executeUpdate();
-
-			theQuery = session.createQuery("update Room set enabled = false where hotel = :hotel");
-			theQuery.setParameter("hotel", hotel);
-			theQuery.executeUpdate();
-
-			for (Room room: hotel.getRooms()) {
-				theQuery = session.createQuery("update Booking set enabled = false where room = :room");
-				theQuery.setParameter("room", room);
-				theQuery.executeUpdate();
-			}
+		else {
+			disableHotel(session, hotel);
+			disableRooms(session, hotel);
+			disableBookings(session, hotel.getRooms());
 		}
 	}
 
@@ -109,5 +109,26 @@ public class HotelDAOimpl implements HotelDAO {
 			}
 		}
 		return false;
+	}
+
+	private void disableHotel(Session session, Hotel hotel) {
+		Query<?> theQuery =
+				session.createQuery("update Hotel set enabled = false where id = :id");
+		theQuery.setParameter("id", hotel.getId());
+		theQuery.executeUpdate();
+	}
+
+	private void disableRooms(Session session, Hotel hotel) {
+		Query<?> theQuery =
+				session.createQuery("update Room set enabled = false where hotel = :hotel");
+		theQuery.setParameter("hotel", hotel);
+		theQuery.executeUpdate();
+	}
+
+	private void disableBookings(Session session, List<Room> rooms) {
+		Query<?> theQuery =
+				session.createQuery("update Booking set enabled = false where room in :rooms");
+		theQuery.setParameterList("rooms", rooms);
+		theQuery.executeUpdate();
 	}
 }
