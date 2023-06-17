@@ -14,7 +14,7 @@ public interface HotelDAO {
 
 	void save(Hotel hotel);
 
-	void update(int id, Hotel updateHotel);
+	void update(Hotel updateHotel);
 
 	void delete(int id);
 

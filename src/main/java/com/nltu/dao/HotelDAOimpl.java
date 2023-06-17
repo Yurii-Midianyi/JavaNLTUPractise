@@ -80,11 +80,9 @@ public class HotelDAOimpl implements HotelDAO {
 	}
 
 	@Transactional
-	public void update(int id, Hotel updateHotel) {
-     Session session = sessionFactory.getCurrentSession();
-	 Hotel hotelToBeUpdated = session.get(Hotel.class, id);
-
-	 hotelToBeUpdated.setHotelName(updateHotel.getHotelName());
+	public void update(Hotel updateHotel) {
+		Session session = sessionFactory.getCurrentSession();
+		session.merge(updateHotel);
 	}
 
     @Transactional

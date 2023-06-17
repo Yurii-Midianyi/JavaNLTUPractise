@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-
 	public Boolean checkUserExists(String username) {
 		Session currentSession = sessionFactory.getCurrentSession();
 

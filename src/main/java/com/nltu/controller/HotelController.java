@@ -82,14 +82,14 @@ public class HotelController {
 
 	@GetMapping("/{id}/edit")
 	public String edit (Model model , @PathVariable("id") int id){
+		model.addAttribute("countries", countryService.getAvailableCountries());
 		model.addAttribute("hotel", hotelService.show(id));
 		return "hotels/edit";
 	}
 
 	@PatchMapping("/{id}")
-	public String update(@ModelAttribute("hotel") Hotel hotel,
-						 @PathVariable("id") int id){
-		hotelService.update(id, hotel);
+	public String update(@ModelAttribute("hotel") Hotel hotel){
+		hotelService.update(hotel);
 		return "redirect:/hotel/list";
 	}
 

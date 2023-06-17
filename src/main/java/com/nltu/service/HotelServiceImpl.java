@@ -67,8 +67,8 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     @Transactional
-    public void update(int id, Hotel updateHotel) {
-       hotelDAO.update(id, updateHotel);
+    public void update(Hotel updateHotel) {
+       hotelDAO.update(updateHotel);
     }
 
     @Override

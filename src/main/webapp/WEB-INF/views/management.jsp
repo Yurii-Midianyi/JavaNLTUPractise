@@ -87,7 +87,7 @@
                                 <td>
                                     <form method="POST" action="<c:url value="/countries/${country.id}" />">
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" onclick="if (!(confirm('Are you sure you want to delete this?'))) return false" value="Delete">
                                     </form>
                                 </td>
                             </tr>
@@ -109,6 +109,9 @@
                             <th>name</th>
                             <th>enabled</th>
                             <th>country</th>
+                            <th>show</th>
+                            <th>update</th>
+                            <th>delete</th>
                         </tr>
                         <c:forEach var="hotel" items="${hotels}">
                             <tr>
@@ -117,7 +120,7 @@
                                 <td>${hotel.enabled}</td>
                                 <td>${hotel.country.countryName}</td>
                                 <td>
-                                    <form method="GET" action="<c:url value="/hotel/${hotel.id}" />">
+                                    <form method="GET" action="<c:url value="/room/list/${hotel.id}" />">
                                         <input type="submit" value="Show">
                                     </form>
                                 </td>
@@ -129,12 +132,7 @@
                                 <td>
                                     <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <input type="submit" value="Delete">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form method="GET" action="<c:url value="/room/list/${hotel.id}" />">
-                                        <input type="submit" value="Show rooms">
+                                        <input type="submit" onclick="if (!(confirm('Are you sure you want to delete this?'))) return false" value="Delete">
                                     </form>
                                 </td>
                             </tr>
@@ -144,6 +142,77 @@
                 <form method="GET" action="<c:url value="/hotel/new" />">
                     <input type="submit" value="Add new hotel">
                 </form>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-lg m-auto px-5">
+                <h2>Користувачі</h2>
+                <div class="col-lg-6">
+                    <table class="table table-sm table-striped table-bordered">
+                        <tr>
+                            <th>id</th>
+                            <th>username</th>
+                            <th>password</th>
+                            <th>role</th>
+                            <th>enabled</th>
+                            <th>show</th>
+                            <th>delete</th>
+                        </tr>
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.username}</td>
+                                <td>${user.password}</td>
+                                <td>${user.role}</td>
+                                <td>${user.enabled}</td>
+                                <td>
+                                    <form method="GET" action="<c:url value="/booking/list/${user.id}" />">
+                                        <input type="submit" value="Show">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="POST" action="<c:url value="/user/${user.id}" />">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="submit" onclick="if (!(confirm('Are you sure you want to delete this?'))) return false" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-lg m-auto px-5">
+                <h2>Букінги</h2>
+                <div class="col-lg-6">
+                    <table class="table table-sm table-striped table-bordered">
+                        <tr>
+                            <th>id</th>
+                            <th>booked_since</th>
+                            <th>booked_to</th>
+                            <th>room Id</th>
+                            <th>user</th>
+                            <th>enabled</th>
+                            <th>delete</th>
+                        </tr>
+                        <c:forEach var="booking" items="${bookings}">
+                            <tr>
+                                <td>${booking.id}</td>
+                                <td>${booking.bookedSince}</td>
+                                <td>${booking.bookedTo}</td>
+                                <td>${booking.room.id}</td>
+                                <td>${booking.user.username}</td>
+                                <td>${booking.enabled}</td>
+                                <td>
+                                    <form method="GET" action="<c:url value="/booking/delete/${booking.id}"/>">
+                                        <input type="submit" onclick="if (!(confirm('Are you sure you want to delete this?'))) return false" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

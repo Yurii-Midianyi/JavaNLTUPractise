@@ -60,7 +60,7 @@ public class CountryDAOimpl implements CountryDAO {
     public void updateCountry(Country country) {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        currentSession.update(country);
+        currentSession.merge(country);
     }
 
     @Override
