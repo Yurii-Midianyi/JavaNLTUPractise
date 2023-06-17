@@ -3,6 +3,7 @@ package com.nltu.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,13 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/management").hasRole("MANAGER")
+                .antMatchers("/countries/**").hasRole("MANAGER")
                 .antMatchers("/user/**").hasRole("MANAGER")
                 .antMatchers("/hotel/new").hasRole("MANAGER")
                 .antMatchers("/hotel/{id}/edit").hasRole("MANAGER")
+                .antMatchers(HttpMethod.PATCH,"/hotel/{id}").hasRole("MANAGER")
+                .antMatchers(HttpMethod.DELETE,"/hotel/{id}").hasRole("MANAGER")
                 .antMatchers("/booking/list").hasRole("MANAGER")
-                .antMatchers("/booking/**").hasAnyRole("MANAGER", "USER")
-                .antMatchers("/countries/new").hasRole("MANAGER")
-                .antMatchers("/countries/{id}/edit").hasRole("MANAGER")
+                .antMatchers("/booking/**").hasAnyRole("MANAGER", "USER")              
                 .antMatchers("/room/showFormForAdd/{hotelId}").hasRole("MANAGER")
                 .antMatchers("/room/saveRoom").hasRole("MANAGER")
                 .antMatchers("/room/showFormForUpdate/{roomId}").hasRole("MANAGER")
