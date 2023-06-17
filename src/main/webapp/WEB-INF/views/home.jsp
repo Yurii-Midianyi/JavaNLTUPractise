@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
@@ -25,41 +26,33 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav ms-auto">
-                <c:if test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
+			<ul class="navbar-nav ms-auto">				
+				<security:authorize access="hasRole('MANAGER')">
 				<li class="nav-item mx-auto" style="padding: 0 10px">
 					<a class="nav-link fs-3" href="<c:url value="/management" />">Management page</a>
 				</li>
-				</c:if>
+				</security:authorize>
+				
 				<li class="nav-item mx-auto" style="padding: 0 10px">
 					<a class="nav-link fs-3" href="<c:url value="/home" />">Home page</a>
 				</li>
 				<li class="nav-item mx-auto" style="padding: 0 10px">
 					<a class="nav-link fs-3" href="<c:url value="/hotel/list" />">Hotel page</a>
 				</li>
-				<c:choose>
-					<c:when test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
+				<security:authorize access="isAuthenticated()">
 						<div>
 							<li class="nav-item mx-auto" style="padding: 0 10px">
 								<a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
 							</li>
 						</div>
-					</c:when>
-					<c:when test="${pageContext.request.isUserInRole('ROLE_USER')}">
-						<div>
-							<li class="nav-item mx-auto" style="padding: 0 10px">
-								<a class="nav-link fs-3" href="<c:url value="/logout" />">Logout</a>
-							</li>
-						</div>
-					</c:when>
-					<c:otherwise>
+				</security:authorize>
+				<security:authorize access="!isAuthenticated()">						
 						<div>
 							<li class="nav-item mx-auto" style="padding: 0 10px">
 								<a class="nav-link fs-3" href="<c:url value="/login" />">Login</a>
 							</li>
 						</div>
-					</c:otherwise>
-				</c:choose>
+				</security:authorize>
 			</ul>
 		</div>
 	</div>

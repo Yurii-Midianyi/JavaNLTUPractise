@@ -47,7 +47,7 @@
 		</table>
 	</form:form>
 	
-	<a href="${pageContext.request.contextPath}/booking/list">Back to List</a>
+	<a href="${pageContext.request.contextPath}/home">Back to Home</a>
 	
 </body>
 </html>

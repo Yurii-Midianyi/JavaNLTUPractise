@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -26,11 +27,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <c:if test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
+        <security:authorize access="hasRole('MANAGER')">
         <li class="nav-item mx-auto" style="padding: 0 10px">
           <a class="nav-link fs-3" href="<c:url value="/management" />">Management page</a>
         </li>
-        </c:if>
+       </security:authorize>
         <li class="nav-item mx-auto" style="padding: 0 10px">
           <a class="nav-link fs-3" href="<c:url value="/home" />">Home page</a>
         </li>
