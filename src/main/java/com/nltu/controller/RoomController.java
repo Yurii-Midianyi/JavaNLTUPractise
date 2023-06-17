@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nltu.entity.Booking;
 import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
+import com.nltu.security.UserDetails;
 import com.nltu.service.HotelService;
 import com.nltu.service.RoomService;
 import com.nltu.service.UserService;
@@ -98,10 +101,17 @@ public class RoomController {
 	}
 
 	@GetMapping("/book/{roomId}")
-	public String bookRoom(@PathVariable int roomId, Model model) {				
+	public String bookRoom(@PathVariable int roomId, Model model) {
+		int id = -1;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null) {
+	    	UserDetails principal = (UserDetails) authentication.getPrincipal();
+	        id = principal.getId();
+	    }
+		
 		Booking booking = new Booking();
 		booking.setRoom(roomService.getRoom(roomId));
-		booking.setUser(userService.getUser(1)); //hardcoded user
+		booking.setUser(userService.getUser(id)); 
 		model.addAttribute("booking", booking);	
 		return "booking-form";
 	}
