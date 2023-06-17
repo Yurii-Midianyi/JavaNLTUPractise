@@ -63,8 +63,8 @@
                     <table class="table table-sm table-striped table-bordered">
                         <tr>
                             <th>id</th>
-                            <th>enabled</th>
                             <th>name</th>
+                            <th>enabled</th>
                             <th>show</th>
                             <th>update</th>
                             <th>delete</th>
@@ -72,8 +72,8 @@
                         <c:forEach var="country" items="${countries}">
                             <tr>
                                 <td>${country.id}</td>
-                                <td>${country.enabled}</td>
                                 <td>${country.countryName}</td>
+                                <td>${country.enabled}</td>
                                 <td>
                                     <form method="GET" action="<c:url value="/countries/${country.id}" />">
                                         <input type="submit" value="Show">
@@ -107,8 +107,8 @@
                         <tr>
                             <th>id</th>
                             <th>name</th>
-                            <th>enabled</th>
                             <th>country</th>
+                            <th>enabled</th>
                             <th>show</th>
                             <th>update</th>
                             <th>delete</th>
@@ -117,8 +117,8 @@
                             <tr>
                                 <td>${hotel.id}</td>
                                 <td>${hotel.hotelName}</td>
-                                <td>${hotel.enabled}</td>
                                 <td>${hotel.country.countryName}</td>
+                                <td>${hotel.enabled}</td>
                                 <td>
                                     <form method="GET" action="<c:url value="/room/list/${hotel.id}" />">
                                         <input type="submit" value="Show">

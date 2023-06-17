@@ -76,7 +76,7 @@ public class HotelController {
 		}
 		else {
 			hotelService.save(hotel);
-			return "redirect:/hotel/list";
+			return "redirect:/management";
 		}
 	}
 
@@ -90,13 +90,13 @@ public class HotelController {
 	@PatchMapping("/{id}")
 	public String update(@ModelAttribute("hotel") Hotel hotel){
 		hotelService.update(hotel);
-		return "redirect:/hotel/list";
+		return "redirect:/management";
 	}
 
 	@DeleteMapping("/{id}")
 	public String delete (@PathVariable("id") int id){
 		hotelService.delete(id);
-		return "redirect:/hotel/list";
+		return "redirect:/management";
 	}
 
 	@PostMapping("/{id}")

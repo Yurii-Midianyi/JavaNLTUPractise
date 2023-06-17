@@ -77,6 +77,6 @@ public class BookingController {
 	@GetMapping("/delete/{bookingId}") 
 	public String deleteBooking(@PathVariable int bookingId, Model model) {	
 		bookingService.deleteBooking(bookingId);
-		return "redirect:/booking/list";
+		return "redirect:/management";
 	}
 }
