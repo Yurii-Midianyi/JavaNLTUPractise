@@ -71,6 +71,7 @@ public class BookingController {
 		List<Booking> bookings = bookingService.getBookingsByUserId(userId);
 		bookings.toString();
 		model.addAttribute("bookings", bookings);
+		model.addAttribute("username", userService.getUser(userId).getUsername());
 		return "bookingList";
 	}
 	

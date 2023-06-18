@@ -34,6 +34,7 @@ public class CountriesController {
     @GetMapping("/{id}")
     public String showCountry(@PathVariable("id") int id, Model model) {
         model.addAttribute("country", countryService.getCountry(id));
+        model.addAttribute("hotels", countryService.findHotelsByCountry(id));
         return "countries/show";
     }
 

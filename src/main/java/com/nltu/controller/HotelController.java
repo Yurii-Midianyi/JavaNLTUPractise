@@ -10,6 +10,7 @@ import com.nltu.entity.Country;
 import com.nltu.service.BookingService;
 import com.nltu.service.CountryService;
 import com.nltu.service.HotelService;
+import com.nltu.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +30,17 @@ public class HotelController {
 	private final HotelService hotelService;
 	private final CountryService countryService;
 	private final BookingService bookingService;
+	private final RoomService roomService;
 	
 	@Autowired
-	public HotelController(HotelService hotelService, CountryService countryService, BookingService bookingService) {
+	public HotelController(HotelService hotelService,
+						   CountryService countryService,
+						   BookingService bookingService,
+						   RoomService roomService) {
 		this.hotelService = hotelService;
 		this.countryService = countryService;
 		this.bookingService = bookingService;
+		this.roomService = roomService;
 	}
 
 	@GetMapping("/list")
@@ -53,6 +59,7 @@ public class HotelController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model){
 		model.addAttribute("hotel", hotelService.show(id));
+		model.addAttribute("allRooms", roomService.getAvailableRooms(id));
         return "hotels/show";
 	}
 
@@ -119,6 +126,7 @@ public class HotelController {
 		LocalDate bookedTo = LocalDate.parse(bTo);
 		List<Room> rooms = bookingService.getAllAvailableBookingForPeriod(id, bookedSince, bookedTo);
 		model.addAttribute("rooms", rooms);
+		model.addAttribute("allRooms", roomService.getAvailableRooms(id));
         return "hotels/show";
 	}
 	
