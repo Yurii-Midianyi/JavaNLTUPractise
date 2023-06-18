@@ -1,11 +1,7 @@
 package com.nltu.entity;
-
-
 import java.util.List;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
 import jakarta.persistence.*;
 
 @Entity
