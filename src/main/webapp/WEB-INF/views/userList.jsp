@@ -10,7 +10,6 @@
 		<tr>
 			<th>id</th>
 			<th>username</th>
-			<th>password</th>
 			<th>enabled</th>
 			<th>role</th>
 		</tr>
@@ -18,7 +17,6 @@
 			<tr>
 				<td>${tempUser.id}</td>
 				<td>${tempUser.username}</td>
-				<td>${tempUser.password}</td>
 				<td>${tempUser.enabled}</td>
 				<td>${tempUser.role}</td>
 				<td>

@@ -61,7 +61,7 @@ public class BookingController {
 		}
 		
 		bookingService.saveBooking(booking);
-		return "redirect:/booking/list";		
+		return "redirect:/home";		
 	}
 	
 

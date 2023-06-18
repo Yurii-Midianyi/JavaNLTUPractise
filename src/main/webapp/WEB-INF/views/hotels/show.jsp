@@ -1,21 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <title>Hotel</title>
 </head>
 <body>
-<c:if test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
-<p>${hotel.hotelName}</p>
-<p>${hotel.id}</p>
-
-<a href="<c:url value="/hotel/${hotel.id}/edit" />">Edit</a>
-<a href="<c:url value="/room/list/${hotel.id}" />">Rooms</a>
-<form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete"/>
-</form>
-</c:if>
+<security:authorize access="hasRole('MANAGER')">
+	<p>${hotel.hotelName}</p>
+	<p>${hotel.id}</p>
+	<a href="<c:url value="/hotel/${hotel.id}/edit" />">Edit</a>
+	<a href="<c:url value="/room/list/${hotel.id}" />">Rooms</a>
+	<form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
+	    <input type="hidden" name="_method" value="DELETE">
+	    <input type="submit" value="Delete"/>
+	</form>
+</security:authorize>
 <h2>Find Rooms for selected period</h2>
 <form method="POST" action="<c:url value="/hotel/${hotel.id}" />">
    <span>since:</span>
