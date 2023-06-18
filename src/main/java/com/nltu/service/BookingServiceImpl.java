@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nltu.dao.BookingDAO;
 import com.nltu.entity.Booking;
+import com.nltu.entity.Hotel;
 import com.nltu.entity.Room;
 import jakarta.transaction.Transactional;
 
@@ -71,13 +72,17 @@ public class BookingServiceImpl implements BookingService {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<Booking> theQuery =
-				currentSession.createQuery("from Booking WHERE enabled=1 AND room.id =:roomId AND (bookedSince BETWEEN "
-				+ ":bookedSince AND :bookedTo OR bookedTo BETWEEN :bookedSince AND :bookedTo)" , Booking.class);
+				currentSession.createQuery("from Booking "
+						+ "WHERE enabled=1 "
+						+ "AND room.id =:roomId "
+						+ "AND ((bookedSince BETWEEN :bookedSince AND :bookedTo) "
+						+ "OR (bookedTo BETWEEN :bookedSince AND :bookedTo))" , Booking.class);
 		theQuery.setParameter("bookedSince", bookedSince);
 		theQuery.setParameter("bookedTo", bookedTo);
 		theQuery.setParameter("roomId", roomId);
 			
 		List<Booking> bookings = theQuery.getResultList();
+		System.out.println(bookings);
 		return (bookings.isEmpty()) ? true : false;
 	}
 
@@ -94,23 +99,32 @@ public class BookingServiceImpl implements BookingService {
 		}
 		
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Room> theQuery =
-				currentSession.createQuery("FROM Room r "
-						+ "LEFT JOIN r.bookings b "
-						+ "WHERE r.hotel.id = :hotelId "
-						+ "AND (b.bookedSince > :bookedTo OR b.bookedTo < :bookedSince OR b.id IS NULL)" , Room.class);
+			
+		//get all booking that have all rooms in specific hotel
+		Query<Booking> bookingQuery = currentSession.createQuery("FROM Booking b " + 
+															"LEFT JOIN b.room r " +
+															"WHERE r.hotel.id = :hotelId ", Booking.class);
+		bookingQuery.setParameter("hotelId", hotelId);
+		List<Booking> bookingList = bookingQuery.getResultList();
 		
-		theQuery.setParameter("bookedSince", bookedSince);
-		theQuery.setParameter("bookedTo", bookedTo);
-		theQuery.setParameter("hotelId", hotelId);
-					
-		return theQuery.getResultList();
+		Hotel hotel = currentSession.get(Hotel.class, hotelId);
+		
+		//get all rooms from that hotel
+		List<Room> allRooms = hotel.getRooms();
+		
+		List<Room> takenRooms = new ArrayList<>();
+		for(Booking b:bookingList) { 
+			if(!b.getEnabled() || takenRooms.contains(b.getRoom())) {
+				continue;
+			}
+			//check if bookings overlap our given dates 
+			//if yes add room with these bookings to takenRooms
+			else if((b.getBookedSince().isBefore(bookedTo) || b.getBookedSince().isEqual(bookedTo)) &&
+					(b.getBookedTo().isAfter(bookedSince) || b.getBookedTo().isEqual(bookedSince))) {
+				takenRooms.add(b.getRoom());
+			}
+		}					
+		allRooms.removeAll(takenRooms); //remove all taken rooms
+		return allRooms;		
 	}
 }
-/*
- * currentSession.createQuery("SELECT r.id, r.capacity, r.enabled "
-						+ "FROM Room r "
-						+ "LEFT JOIN r.bookings b "
-						+ "WHERE r.hotel.id = :hotelId "
-						+ "AND (b.bookedSince > :bookedTo OR b.bookedTo < :bookedSince)" , Room.class);
- */

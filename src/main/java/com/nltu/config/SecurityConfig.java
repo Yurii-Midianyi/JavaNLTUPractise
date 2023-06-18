@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/room/saveRoom").hasRole("MANAGER")
                 .antMatchers("/room/showFormForUpdate/{roomId}").hasRole("MANAGER")
                 .antMatchers("/room/delete/{roomId}").hasRole("MANAGER")
+                .antMatchers("/room/book/{roomId}").authenticated()
                 .antMatchers("/login").permitAll()
                 .anyRequest().permitAll()
                 .and()
