@@ -40,14 +40,14 @@ public class RoomController {
 	public String showList(@PathVariable int hotelId, Model model) {
 		
 		// Retrieve the list of rooms for the specified hotelId
-		//List<Room> rooms = roomService.getRooms(hotelId); //get all rooms
-		List<Room> rooms = roomService.getAvailableRooms(hotelId); //get all available rooms
+		List<Room> rooms = roomService.getRoomsOfHotel(hotelId); //get all rooms
+		//List<Room> rooms = roomService.getAvailableRooms(hotelId); //get all available rooms
 		
 		// Add the list of rooms to the model
 		model.addAttribute("rooms", rooms);
 		
 		// Add the hotelId to the model
-		model.addAttribute("hotelId", hotelId);
+		model.addAttribute("hotel", hotelService.getHotel(hotelId));
 		
 		// Return the view name
 		return "roomList";

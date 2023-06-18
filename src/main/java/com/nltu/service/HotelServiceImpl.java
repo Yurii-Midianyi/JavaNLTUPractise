@@ -43,6 +43,12 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     @Transactional
+    public List<Hotel> getAvailableHotels() {
+        return hotelDAO.getAvailableHotels();
+    }
+
+    @Override
+    @Transactional
     public Hotel getHotel(int id) {
         return hotelDAO.getHotel(id);
     }
@@ -61,8 +67,8 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     @Transactional
-    public void update(int id, Hotel updateHotel) {
-       hotelDAO.update(id, updateHotel);
+    public void update(Hotel updateHotel) {
+       hotelDAO.update(updateHotel);
     }
 
     @Override

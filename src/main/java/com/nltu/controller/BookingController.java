@@ -71,12 +71,13 @@ public class BookingController {
 		List<Booking> bookings = bookingService.getBookingsByUserId(userId);
 		bookings.toString();
 		model.addAttribute("bookings", bookings);
+		model.addAttribute("username", userService.getUser(userId).getUsername());
 		return "bookingList";
 	}
 	
 	@GetMapping("/delete/{bookingId}") 
 	public String deleteBooking(@PathVariable int bookingId, Model model) {	
 		bookingService.deleteBooking(bookingId);
-		return "redirect:/booking/list";
+		return "redirect:/management";
 	}
 }

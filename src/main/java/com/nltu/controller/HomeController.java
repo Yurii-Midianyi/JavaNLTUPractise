@@ -30,15 +30,15 @@ public class HomeController {
 
     @GetMapping
 	public String selectCountry(Model model, @ModelAttribute("country") Country country){
-		model.addAttribute("countries", countryService.getCountries());
+		model.addAttribute("countries", countryService.getAvailableCountries());
 		return "home";
 	}
 
 	@GetMapping("/result")
 	public String result(Model model , @ModelAttribute("country")Country country,
 						               @ModelAttribute("hotels")Hotel hotel){
-		model.addAttribute("countries", countryService.findAvailableHotelsByCountry(country.getId()));
-		return "result";
+		model.addAttribute("hotels", countryService.findAvailableHotelsByCountry(country.getId()));
+		return "hotels/hotelList";
 	}
 
 

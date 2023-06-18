@@ -10,6 +10,7 @@ import com.nltu.entity.Country;
 import com.nltu.service.BookingService;
 import com.nltu.service.CountryService;
 import com.nltu.service.HotelService;
+import com.nltu.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,18 +30,23 @@ public class HotelController {
 	private final HotelService hotelService;
 	private final CountryService countryService;
 	private final BookingService bookingService;
+	private final RoomService roomService;
 	
 	@Autowired
-	public HotelController(HotelService hotelService, CountryService countryService, BookingService bookingService) {
+	public HotelController(HotelService hotelService,
+						   CountryService countryService,
+						   BookingService bookingService,
+						   RoomService roomService) {
 		this.hotelService = hotelService;
 		this.countryService = countryService;
 		this.bookingService = bookingService;
+		this.roomService = roomService;
 	}
 
 	@GetMapping("/list")
 	@Transactional
 	public String listCustomers(Model model) {
-		List<Hotel> theHotels = hotelService.getHotels();
+		List<Hotel> theHotels = hotelService.getAvailableHotels();
 		
 		//resolve issue with Lazy loading
 		theHotels.toString();
@@ -53,6 +59,7 @@ public class HotelController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model){
 		model.addAttribute("hotel", hotelService.show(id));
+		model.addAttribute("allRooms", roomService.getAvailableRooms(id));
         return "hotels/show";
 	}
 
@@ -60,7 +67,7 @@ public class HotelController {
 	public String newHotel(Model model, @ModelAttribute("country") Country country){
 		model.addAttribute("hotel", new Hotel());
 		model.addAttribute("country", new Country());
-		model.addAttribute("countries", countryService.getCountries());
+		model.addAttribute("countries", countryService.getAvailableCountries());
 		return "/hotels/new";
 	}
 	@PostMapping("/list")
@@ -71,32 +78,32 @@ public class HotelController {
 					"This hotel is already exists");
 
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("countries", countryService.getCountries());
+			model.addAttribute("countries", countryService.getAvailableCountries());
 			return "hotels/new";
 		}
 		else {
 			hotelService.save(hotel);
-			return "redirect:/hotel/list";
+			return "redirect:/management";
 		}
 	}
 
 	@GetMapping("/{id}/edit")
 	public String edit (Model model , @PathVariable("id") int id){
+		model.addAttribute("countries", countryService.getAvailableCountries());
 		model.addAttribute("hotel", hotelService.show(id));
 		return "hotels/edit";
 	}
 
 	@PatchMapping("/{id}")
-	public String update(@ModelAttribute("hotel") Hotel hotel,
-						 @PathVariable("id") int id){
-		hotelService.update(id, hotel);
-		return "redirect:/hotel/list";
+	public String update(@ModelAttribute("hotel") Hotel hotel){
+		hotelService.update(hotel);
+		return "redirect:/management";
 	}
 
 	@DeleteMapping("/{id}")
 	public String delete (@PathVariable("id") int id){
 		hotelService.delete(id);
-		return "redirect:/hotel/list";
+		return "redirect:/management";
 	}
 
 	@PostMapping("/{id}")
@@ -119,6 +126,7 @@ public class HotelController {
 		LocalDate bookedTo = LocalDate.parse(bTo);
 		List<Room> rooms = bookingService.getAllAvailableBookingForPeriod(id, bookedSince, bookedTo);
 		model.addAttribute("rooms", rooms);
+		model.addAttribute("allRooms", roomService.getAvailableRooms(id));
         return "hotels/show";
 	}
 	

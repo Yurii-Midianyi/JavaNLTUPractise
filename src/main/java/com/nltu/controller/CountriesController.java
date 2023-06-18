@@ -34,6 +34,7 @@ public class CountriesController {
     @GetMapping("/{id}")
     public String showCountry(@PathVariable("id") int id, Model model) {
         model.addAttribute("country", countryService.getCountry(id));
+        model.addAttribute("hotels", countryService.findHotelsByCountry(id));
         return "countries/show";
     }
 
@@ -54,7 +55,7 @@ public class CountriesController {
             return "countries/new";
         else {
             countryService.saveCountry(country);
-            return "redirect:/countries";
+            return "redirect:/management";
         }
     }
 
@@ -67,12 +68,12 @@ public class CountriesController {
     @PatchMapping("/{id}")
     public String updateCountry(@ModelAttribute("country") Country country) {
         countryService.updateCountry(country);
-        return "redirect:/countries";
+        return "redirect:/management";
     }
 
     @DeleteMapping("/{id}")
     public String deleteCountry(@PathVariable("id") int id) {
         countryService.deleteCountry(id);
-        return "redirect:/countries";
+        return "redirect:/management";
     }
 }

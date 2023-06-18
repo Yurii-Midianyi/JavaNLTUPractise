@@ -33,6 +33,12 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
+    public List<Country> getAvailableCountries() {
+        return countryDAO.getAvailableCountries();
+    }
+
+    @Override
+    @Transactional
     public Country getCountry(int id) {
         return countryDAO.getCountry(id);
     }

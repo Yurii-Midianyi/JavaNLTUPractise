@@ -9,6 +9,8 @@ public interface CountryService {
 
     List<Country> getCountries();
 
+    List<Country> getAvailableCountries();
+
     Country getCountry(int id);
 
     void saveCountry(Country country);
