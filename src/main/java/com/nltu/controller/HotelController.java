@@ -107,27 +107,29 @@ public class HotelController {
 	}
 
 	@PostMapping("/{id}")
-	public String showAllRoomsForPeriod(@PathVariable("id") int id, 
+	@Transactional
+	public String showAllRoomsForPeriod(@PathVariable("id") int id,
 										@RequestParam("bSince") String bSince,
 										@RequestParam("bTo") String bTo,
 										@RequestParam("hotelName") String hotelName,
-	                                    @RequestParam("hotelId") int hotelId,
+										@RequestParam("hotelId") int hotelId,
 										Model model){
-		
-		//to fix issue with disappearing hotel.id 
-		model.addAttribute("hotel", new HotelDTO(hotelId, hotelName)); 
-		
+
+		//to fix issue with disappearing hotel.id
+		model.addAttribute("hotel", new HotelDTO(hotelId, hotelName));
+
 		if (bSince.isEmpty() || bTo.isEmpty()) {
-			model.addAttribute("errorMessage", "Please select both start and end dates.");		
+			model.addAttribute("errorMessage", "Please select both start and end dates.");
 			return "hotels/show";
 		}
-		
+		countryService.getCountries().toString();
+		hotelService.getHotels().toString();
 		LocalDate bookedSince = LocalDate.parse(bSince);
 		LocalDate bookedTo = LocalDate.parse(bTo);
 		List<Room> rooms = bookingService.getAllAvailableBookingForPeriod(id, bookedSince, bookedTo);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("allRooms", roomService.getAvailableRooms(id));
-        return "hotels/show";
+		return "hotels/show";
 	}
 	
 }
